@@ -12,6 +12,8 @@ model Deliveryman {
   username String @unique
   password String
 
+  deliveries Delivery[]
+
   @@map("deliverymans")
 }
 
@@ -20,5 +22,20 @@ model Client {
   username String @unique
   password String
 
+  deliveries Delivery[]
+
   @@map("clients")
+}
+
+model Delivery {
+  id             String      @id @default(uuid())
+  deliveryman_id String
+  deliveryman    Deliveryman @relation(fields: [deliveryman_id], references: [id])
+  client_id      String
+  client         Client      @relation(fields: [client_id], references: [id])
+  item_name      String
+  created_at     DateTime    @default(now())
+  delivered_at   DateTime    @default(now())
+
+  @@map("deliveries")
 }
