@@ -1,4 +1,4 @@
-import { CreateClientUseCase } from '@application/usecases/client/CreateClient';
+import { CreateClientUseCase } from '@application/usecases/client/Create';
 
 import { makeClientsRepository } from '@main/factories/repositories/Client';
 import { makeHashProvider } from '@main/factories/providers/cryptography/Hash';

@@ -1,4 +1,4 @@
-import { ICreateClientUseCase } from '@domain/usecases/clients/CreateClient';
+import { ICreateClientUseCase } from '@domain/usecases/clients/Create';
 
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '@presentation/protocols';
 import { badRequest, conflict, created } from '@presentation/helpers/http';

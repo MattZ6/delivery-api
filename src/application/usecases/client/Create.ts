@@ -1,4 +1,4 @@
-import { ICreateClientUseCase } from '@domain/usecases/clients/CreateClient';
+import { ICreateClientUseCase } from '@domain/usecases/clients/Create';
 import { ClientAlreadyExistsWithProvidedUsernameError } from '@domain/errors/client';
 
 import { ICheckIfClientExistsByUsernameRepository, ICreateClientRepository } from '@application/protocols/repositories/client';
