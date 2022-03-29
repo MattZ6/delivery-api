@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+
+  # Database
+  delivery_database:
+    image: postgres
+    container_name: delivery_database
+    restart: always
+    ports:
+      - ${DATABASE_PORT}:5432
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASS}
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
