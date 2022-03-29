@@ -11,8 +11,12 @@
     "dev": "tsnd --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "db:migration:create": "cross-env DATABASE_HOST=localhost prisma migrate dev",
-    "db:studio": "cross-env DATABASE_HOST=localhost prisma studio"
+    "prisma": "cross-env DATABASE_HOST=localhost prisma",
+    "db:migration:create": "yarn prisma migrate dev",
+    "db:studio": "yarn prisma studio"
+  },
+  "prisma": {
+    "schema": "src/infra/database/prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/bcrypt": "5.0.0",
