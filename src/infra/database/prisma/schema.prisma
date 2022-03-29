@@ -8,9 +8,9 @@ datasource db {
 }
 
 model Deliveryman {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
+  id            String @id @default(uuid())
+  username      String @unique
+  password_hash String
 
   deliveries Delivery[]
 
@@ -18,9 +18,9 @@ model Deliveryman {
 }
 
 model Client {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
+  id            String @id @default(uuid())
+  username      String @unique
+  password_hash String
 
   deliveries Delivery[]
 
