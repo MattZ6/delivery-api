@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 
-import { app } from './app';
+import { app } from '@main/config/app';
 
 config();
 

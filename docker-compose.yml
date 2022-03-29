@@ -3,9 +3,9 @@ version: "3.9"
 services:
 
   # Database
-  delivery_database:
+  database:
     image: postgres
-    container_name: delivery_database
+    container_name: database
     restart: always
     ports:
       - ${DATABASE_PORT}:5432
@@ -15,6 +15,20 @@ services:
       - POSTGRES_DB=${DATABASE_NAME}
     volumes:
       - pgdata:/data/postgres
+
+  # Application
+  api:
+    build: .
+    container_name: api
+    restart: always
+    ports:
+      - ${API_PORT}:${API_PORT}
+    volumes:
+      - .:/usr/app
+    depends_on:
+      - database
+    links:
+      - database
 
 volumes:
   pgdata:
