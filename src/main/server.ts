@@ -1,9 +1,21 @@
 import { config } from 'dotenv';
 
-import { app } from '@main/config/app';
+function setupEnv() {
+  config();
+}
 
-config();
+async function startServer() {
+  const { apiConfig } = await import('@main/config/env/api');
+  const { app } = await import('@main/config/app');
 
-app.listen(process.env.API_PORT, () => {
-  console.log(`🍌 App is running at ${process.env.API_URL}:${process.env.API_PORT}`);
-});
+  app.listen(apiConfig.PORT, () => {
+    console.log(`🍌 App is running at ${apiConfig.URL}:${apiConfig.PORT}`);
+  });
+}
+
+function initialize() {
+  setupEnv();
+  startServer();
+}
+
+initialize();
