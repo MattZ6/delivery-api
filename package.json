@@ -9,7 +9,7 @@
   "scripts": {
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
-    "db:migrate:dev": "cross-env DATABASE_HOST=localhost prisma migrate dev",
+    "db:migration:create": "cross-env DATABASE_HOST=localhost prisma migrate dev",
     "db:studio": "cross-env DATABASE_HOST=localhost prisma studio"
   },
   "devDependencies": {
