@@ -3,5 +3,5 @@
   "semanticCommits": true,
   "stabilityDays": 2,
   "prCreation": "not-pending",
-  "labels": ["📦 dependencies"],
+  "labels": ["📦 dependencies"]
 }
