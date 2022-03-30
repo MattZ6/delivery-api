@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { adaptRoute } from '@main/adapters/express/routeAdapter';
 import { makeAuthenticateClientController } from '@main/factories/controllers/client/Authenticate';
-import { makeCreateClientController } from '@main/factories/controllers/client/CreateClient';
+import { makeCreateClientController } from '@main/factories/controllers/client/Create';
 
 const routes = Router();
 
