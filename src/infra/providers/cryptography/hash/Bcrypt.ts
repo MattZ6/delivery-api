@@ -1,8 +1,13 @@
 import { hash, compare } from 'bcrypt';
 
-import { ICompareHashProvider, IGenerateHashProvider } from '@application/protocols/providers/cryptography/hash';
+import {
+  ICompareHashProvider,
+  IGenerateHashProvider,
+} from '@application/protocols/providers/cryptography/hash';
 
-export class BcryptHashProvider implements IGenerateHashProvider, ICompareHashProvider {
+export class BcryptHashProvider
+  implements IGenerateHashProvider, ICompareHashProvider
+{
   constructor(private readonly salt: number) {}
 
   async hash(data: IGenerateHashProvider.Input): Promise<string> {

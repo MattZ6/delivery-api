@@ -1,7 +1,7 @@
 import { CreateClientUseCase } from '@application/usecases/client/Create';
 
-import { makeClientsRepository } from '@main/factories/repositories/Client';
 import { makeHashProvider } from '@main/factories/providers/cryptography/Hash';
+import { makeClientsRepository } from '@main/factories/repositories/Client';
 
 export function makeCreateClientUseCase() {
   const clientsRepository = makeClientsRepository();
@@ -11,6 +11,6 @@ export function makeCreateClientUseCase() {
   return new CreateClientUseCase(
     clientsRepository,
     hashProvider,
-    clientsRepository,
+    clientsRepository
   );
 }

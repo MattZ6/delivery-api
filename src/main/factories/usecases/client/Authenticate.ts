@@ -1,4 +1,5 @@
 import { AuthenticateClientUseCase } from '@application/usecases/client/Authenticate';
+
 import { authConfig } from '@main/config/env/auth';
 import { makeCryptographyProvider } from '@main/factories/providers/cryptography/Cryptography';
 import { makeHashProvider } from '@main/factories/providers/cryptography/Hash';
@@ -19,6 +20,6 @@ export function makeAuthenticateClientUseCase() {
     cryptographyProvider,
     uuidProvider,
     authConfig.REFRESH_TOKEN_EXPIRES_IN_MILLISSECONDS,
-    clientTokensRepository,
+    clientTokensRepository
   );
 }

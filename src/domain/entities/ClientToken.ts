@@ -5,4 +5,4 @@ export type ClientToken = {
   expires_in: Date;
   created_at: Date;
   updated_at: Date;
-}
+};

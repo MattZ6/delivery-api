@@ -1,9 +1,16 @@
-import { IEncryptProvider } from "@application/protocols/providers/cryptography/cryptography";
-import { ICompareHashProvider } from "@application/protocols/providers/cryptography/hash";
-import { IGenerateUuidProvider } from "@application/protocols/providers/uuid";
-import { IFindClientByUsername, ICreateClientTokenRepository } from "@application/protocols/repositories/client";
-import { ClientNotFoundWithProvidedUsernameError, WrongPasswordError } from "@domain/errors";
-import { IAuthenticateClientUseCase } from "@domain/usecases/clients/Authenticate";
+import {
+  ClientNotFoundWithProvidedUsernameError,
+  WrongPasswordError,
+} from '@domain/errors';
+import { IAuthenticateClientUseCase } from '@domain/usecases/clients/Authenticate';
+
+import { IEncryptProvider } from '@application/protocols/providers/cryptography/cryptography';
+import { ICompareHashProvider } from '@application/protocols/providers/cryptography/hash';
+import { IGenerateUuidProvider } from '@application/protocols/providers/uuid';
+import {
+  IFindClientByUsername,
+  ICreateClientTokenRepository,
+} from '@application/protocols/repositories/client';
 
 export class AuthenticateClientUseCase implements IAuthenticateClientUseCase {
   constructor(
@@ -12,10 +19,12 @@ export class AuthenticateClientUseCase implements IAuthenticateClientUseCase {
     private readonly encryptProvider: IEncryptProvider,
     private readonly generateUuidProvider: IGenerateUuidProvider,
     private readonly refreshTokenExpiresTimeInMillisseconds: number,
-    private readonly createClientTokenRepository: ICreateClientTokenRepository,
+    private readonly createClientTokenRepository: ICreateClientTokenRepository
   ) {}
 
-  async execute(data: IAuthenticateClientUseCase.Input): Promise<IAuthenticateClientUseCase.Output> {
+  async execute(
+    data: IAuthenticateClientUseCase.Input
+  ): Promise<IAuthenticateClientUseCase.Output> {
     const { username, password } = data;
 
     const client = await this.findClientByUsername.findByUsername({ username });
@@ -26,7 +35,7 @@ export class AuthenticateClientUseCase implements IAuthenticateClientUseCase {
 
     const passwordsMatch = await this.compareHashProvider.compare({
       value: password,
-      hashed_value: client.password_hash
+      hashed_value: client.password_hash,
     });
 
     if (!passwordsMatch) {
@@ -36,8 +45,8 @@ export class AuthenticateClientUseCase implements IAuthenticateClientUseCase {
     const accessToken = await this.encryptProvider.encrypt({
       subject: client.id,
       payload: {
-        role: 'client'
-      }
+        role: 'client',
+      },
     });
 
     const expiresDate = new Date(
@@ -55,6 +64,6 @@ export class AuthenticateClientUseCase implements IAuthenticateClientUseCase {
     return {
       access_token: accessToken,
       refresh_token: clientToken.token,
-    }
+    };
   }
 }

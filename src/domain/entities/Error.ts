@@ -5,4 +5,4 @@ export type Error = {
   http_method: string;
   thrown_at: string;
   created_at: Date;
-}
+};

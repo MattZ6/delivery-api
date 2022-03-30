@@ -10,7 +10,7 @@ import {
 export class ControllerErrorHandlerDecorator implements IController {
   constructor(
     private readonly controller: IController,
-    private readonly saveErrorRepository: ISaveErrorRepository,
+    private readonly saveErrorRepository: ISaveErrorRepository
   ) {}
 
   async handle(request: IHttpRequest): Promise<IHttpResponse> {

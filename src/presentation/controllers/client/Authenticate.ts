@@ -1,16 +1,32 @@
-import { ClientNotFoundWithProvidedUsernameError, WrongPasswordError } from "@domain/errors";
-import { IAuthenticateClientUseCase } from "@domain/usecases/clients/Authenticate";
-import { badRequest, notFound, ok, unprocessableEntity } from "@presentation/helpers/http";
-import { IController, IValidation, IHttpRequest, IHttpResponse } from "@presentation/protocols";
-import { ValidationError } from "@presentation/validations/errors";
+import {
+  ClientNotFoundWithProvidedUsernameError,
+  WrongPasswordError,
+} from '@domain/errors';
+import { IAuthenticateClientUseCase } from '@domain/usecases/clients/Authenticate';
+
+import {
+  badRequest,
+  notFound,
+  ok,
+  unprocessableEntity,
+} from '@presentation/helpers/http';
+import {
+  IController,
+  IValidation,
+  IHttpRequest,
+  IHttpResponse,
+} from '@presentation/protocols';
+import { ValidationError } from '@presentation/validations/errors';
 
 class AuthenticateClientController implements IController {
-  constructor (
+  constructor(
     private readonly validation: IValidation,
-    private readonly authenticateClientUseCase: IAuthenticateClientUseCase,
+    private readonly authenticateClientUseCase: IAuthenticateClientUseCase
   ) {}
 
-  async handle(request: AuthenticateClientController.Request): Promise<AuthenticateClientController.Response> {
+  async handle(
+    request: AuthenticateClientController.Request
+  ): Promise<AuthenticateClientController.Response> {
     try {
       const validationError = this.validation.validate(request.body);
 
@@ -48,7 +64,7 @@ namespace AuthenticateClientController {
   type RequestBody = {
     username: string;
     password: string;
-  }
+  };
 
   export type Request = IHttpRequest<RequestBody>;
 

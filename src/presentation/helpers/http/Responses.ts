@@ -1,6 +1,7 @@
-import { ApplicationError } from "@domain/errors";
-import { IHttpResponse } from "@presentation/protocols";
-import { ValidationError } from "@presentation/validations/errors";
+import { ApplicationError } from '@domain/errors';
+
+import { IHttpResponse } from '@presentation/protocols';
+import { ValidationError } from '@presentation/validations/errors';
 
 type ErrorDTO = {
   code: string;
@@ -88,7 +89,9 @@ export function conflict(error: ApplicationError): IHttpResponse<ErrorDTO> {
   };
 }
 
-export function unprocessableEntity(error: ApplicationError): IHttpResponse<ErrorDTO> {
+export function unprocessableEntity(
+  error: ApplicationError
+): IHttpResponse<ErrorDTO> {
   return {
     statusCode: 422,
     body: toErrorDTO(error),

@@ -8,7 +8,9 @@ export class JWTCryptographyProvider implements IEncryptProvider {
     private readonly expiresInSeconds: number
   ) {}
 
-  async encrypt(data: IEncryptProvider.Input): Promise<IEncryptProvider.Output> {
+  async encrypt(
+    data: IEncryptProvider.Input
+  ): Promise<IEncryptProvider.Output> {
     const { subject, payload } = data;
 
     return sign(payload, this.secret, {

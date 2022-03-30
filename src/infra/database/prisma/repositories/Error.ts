@@ -3,7 +3,9 @@ import { ISaveErrorRepository } from '@application/protocols/repositories/error'
 import { prisma } from '..';
 
 export class PostgresErrorsRepository implements ISaveErrorRepository {
-  async save(data: ISaveErrorRepository.Input): Promise<ISaveErrorRepository.Output> {
+  async save(
+    data: ISaveErrorRepository.Input
+  ): Promise<ISaveErrorRepository.Output> {
     const { stack, thrown_at, http_method, resource_uri } = data;
 
     return prisma.error.create({
@@ -12,8 +14,7 @@ export class PostgresErrorsRepository implements ISaveErrorRepository {
         thrown_at,
         http_method,
         resource_uri,
-      }
+      },
     });
   }
 }
-
