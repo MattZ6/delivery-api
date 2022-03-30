@@ -1,4 +1,4 @@
-import { ClientModel } from '@domain/models/Client';
+import { Client } from '@domain/entities/Client';
 
 interface ICreateClientUseCase {
   execute(data: ICreateClientUseCase.Input): Promise<ICreateClientUseCase.Output>;
@@ -10,7 +10,7 @@ namespace ICreateClientUseCase {
     password: string;
   }
 
-  export type Output = ClientModel;
+  export type Output = Client;
 }
 
 export { ICreateClientUseCase };

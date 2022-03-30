@@ -1,4 +1,4 @@
-export type ErrorModel = {
+export type Error = {
   id: string;
   stack: string;
   resource_uri: string;

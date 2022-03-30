@@ -1,4 +1,4 @@
-import { PostgresClientsRepository } from '@infra/database/prisma/repositories';
+import { PostgresClientsRepository } from '@infra/database/prisma/repositories/Client';
 
 export function makeClientsRepository() {
   return new PostgresClientsRepository();

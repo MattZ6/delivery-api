@@ -1,9 +1,9 @@
-import { ErrorModel } from '@domain/models/Error';
+import { Error } from '@domain/entities/Error';
 
 namespace ISaveErrorRepository {
-  export type Input = Pick<ErrorModel, 'stack' | 'resource_uri' | 'http_method' | 'thrown_at'>;
+  export type Input = Pick<Error, 'stack' | 'resource_uri' | 'http_method' | 'thrown_at'>;
 
-  export type Output = ErrorModel;
+  export type Output = Error;
 }
 
 interface ISaveErrorRepository {

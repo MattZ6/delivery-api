@@ -14,5 +14,6 @@
       "@presentation/*": ["presentation/*"],
       "@main/*": ["main/*"]
     },
+    "moduleResolution": "Node"
   }
 }

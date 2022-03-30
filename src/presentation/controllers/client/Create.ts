@@ -1,9 +1,8 @@
-import { ICreateClientUseCase } from '@domain/usecases/clients/Create';
-
-import { IController, IHttpRequest, IHttpResponse, IValidation } from '@presentation/protocols';
-import { badRequest, conflict, created } from '@presentation/helpers/http';
-import { ValidationError } from '@presentation/validations/errors';
-import { ClientAlreadyExistsWithProvidedUsernameError } from '@domain/errors';
+import { ClientAlreadyExistsWithProvidedUsernameError } from "@domain/errors";
+import { ICreateClientUseCase } from "@domain/usecases/clients/Create";
+import { created, badRequest, conflict } from "@presentation/helpers/http";
+import { IController, IValidation, IHttpRequest, IHttpResponse } from "@presentation/protocols";
+import { ValidationError } from "@presentation/validations/errors";
 
 class CreateClientController implements IController {
   constructor (

@@ -1,8 +1,7 @@
-import { ICreateClientUseCase } from '@domain/usecases/clients/Create';
-import { ClientAlreadyExistsWithProvidedUsernameError } from '@domain/errors/client';
-
-import { ICheckIfClientExistsByUsernameRepository, ICreateClientRepository } from '@application/protocols/repositories/client';
-import { IGenerateHashProvider } from '@application/protocols/providers/cryptography/hash';
+import { IGenerateHashProvider } from "@application/protocols/providers/cryptography/hash";
+import { ICheckIfClientExistsByUsernameRepository, ICreateClientRepository } from "@application/protocols/repositories/client";
+import { ClientAlreadyExistsWithProvidedUsernameError } from "@domain/errors";
+import { ICreateClientUseCase } from "@domain/usecases/clients/Create";
 
 export class CreateClientUseCase implements ICreateClientUseCase {
   constructor (

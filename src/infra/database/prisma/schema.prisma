@@ -23,6 +23,7 @@ model Client {
   password_hash String
 
   deliveries Delivery[]
+  tokens     ClientToken[]
 
   @@map("clients")
 }
@@ -49,4 +50,16 @@ model Error {
   created_at   DateTime @default(now())
 
   @@map("errors")
+}
+
+model ClientToken {
+  id         String   @id @default(uuid())
+  token      String
+  client_id  String
+  client     Client   @relation(fields: [client_id], references: [id])
+  expires_in DateTime
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("client_tokens")
 }

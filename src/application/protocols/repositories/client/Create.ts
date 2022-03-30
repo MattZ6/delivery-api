@@ -1,4 +1,4 @@
-import { ClientModel } from '@domain/models/Client';
+import { Client } from '@domain/entities/Client';
 
 namespace ICreateClientRepository {
   export type Input = {
@@ -6,7 +6,7 @@ namespace ICreateClientRepository {
     password_hash: string;
   }
 
-  export type Output = ClientModel;
+  export type Output = Client;
 }
 
 interface ICreateClientRepository {

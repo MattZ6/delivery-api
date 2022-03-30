@@ -1,7 +1,6 @@
-import { ApplicationError } from '@domain/errors';
-
-import { IHttpResponse } from '@presentation/protocols/Http';
-import { ValidationError } from '@presentation/validations/errors';
+import { ApplicationError } from "@domain/errors";
+import { IHttpResponse } from "@presentation/protocols";
+import { ValidationError } from "@presentation/validations/errors";
 
 type ErrorDTO = {
   code: string;
@@ -68,28 +67,28 @@ export function badRequest(
   };
 }
 
-export function unauthorized(error: Error): IHttpResponse<ErrorDTO> {
+export function unauthorized(error: ApplicationError): IHttpResponse<ErrorDTO> {
   return {
     statusCode: 401,
     body: toErrorDTO(error),
   };
 }
 
-export function notFound(error: Error): IHttpResponse<ErrorDTO> {
+export function notFound(error: ApplicationError): IHttpResponse<ErrorDTO> {
   return {
     statusCode: 404,
     body: toErrorDTO(error),
   };
 }
 
-export function conflict(error: Error): IHttpResponse<ErrorDTO> {
+export function conflict(error: ApplicationError): IHttpResponse<ErrorDTO> {
   return {
     statusCode: 409,
     body: toErrorDTO(error),
   };
 }
 
-export function unprocessableEntity(error: Error): IHttpResponse<ErrorDTO> {
+export function unprocessableEntity(error: ApplicationError): IHttpResponse<ErrorDTO> {
   return {
     statusCode: 422,
     body: toErrorDTO(error),
