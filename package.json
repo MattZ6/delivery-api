@@ -1,5 +1,6 @@
 {
   "name": "delivery-api",
+  "description": "🔥 API para a aplicação de entregas, conteúdo complementar na trilha de NodeJS — Ignite",
   "version": "0.1.0",
   "license": "MIT",
   "author": {
