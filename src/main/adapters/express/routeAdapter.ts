@@ -9,7 +9,7 @@ export function adaptRoute(controller: IController) {
       params: request.params ?? {},
       query: request.query ?? {},
       headers: request.headers ?? {},
-      user_id: undefined,
+      client_id: request.client_id,
       original_url: request.originalUrl,
       method: request.method,
     });

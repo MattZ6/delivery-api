@@ -8,13 +8,13 @@ import { IEncryptProvider } from '@application/protocols/providers/cryptography/
 import { ICompareHashProvider } from '@application/protocols/providers/cryptography/hash';
 import { IGenerateUuidProvider } from '@application/protocols/providers/uuid';
 import {
-  IFindClientByUsername,
+  IFindClientByUsernameRepository,
   ICreateClientTokenRepository,
 } from '@application/protocols/repositories/client';
 
 export class AuthenticateClientUseCase implements IAuthenticateClientUseCase {
   constructor(
-    private readonly findClientByUsername: IFindClientByUsername,
+    private readonly findClientByUsernameRepository: IFindClientByUsernameRepository,
     private readonly compareHashProvider: ICompareHashProvider,
     private readonly encryptProvider: IEncryptProvider,
     private readonly generateUuidProvider: IGenerateUuidProvider,
@@ -27,7 +27,9 @@ export class AuthenticateClientUseCase implements IAuthenticateClientUseCase {
   ): Promise<IAuthenticateClientUseCase.Output> {
     const { username, password } = data;
 
-    const client = await this.findClientByUsername.findByUsername({ username });
+    const client = await this.findClientByUsernameRepository.findByUsername({
+      username,
+    });
 
     if (!client) {
       throw new ClientNotFoundWithProvidedUsernameError();

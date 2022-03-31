@@ -1,6 +1,6 @@
 import { Client } from '@domain/entities/Client';
 
-namespace IFindClientByUsername {
+namespace IFindClientByUsernameRepository {
   export type Input = {
     username: string;
   };
@@ -8,10 +8,10 @@ namespace IFindClientByUsername {
   export type Output = Client | null;
 }
 
-interface IFindClientByUsername {
+interface IFindClientByUsernameRepository {
   findByUsername(
-    data: IFindClientByUsername.Input
-  ): Promise<IFindClientByUsername.Output>;
+    data: IFindClientByUsernameRepository.Input
+  ): Promise<IFindClientByUsernameRepository.Output>;
 }
 
-export { IFindClientByUsername };
+export { IFindClientByUsernameRepository };
