@@ -75,6 +75,13 @@ export function unauthorized(error: ApplicationError): IHttpResponse<ErrorDTO> {
   };
 }
 
+export function forbidden(error: ApplicationError): IHttpResponse<ErrorDTO> {
+  return {
+    statusCode: 403,
+    body: toErrorDTO(error),
+  };
+}
+
 export function notFound(error: ApplicationError): IHttpResponse<ErrorDTO> {
   return {
     statusCode: 404,

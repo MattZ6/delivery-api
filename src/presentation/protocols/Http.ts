@@ -9,7 +9,7 @@ export interface IHttpRequest<
   Q = unknown,
   H = unknown
 > {
-  user_id?: string;
+  client_id?: string;
   body: B;
   params: P;
   query: Q;
