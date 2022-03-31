@@ -10,9 +10,6 @@ export class ValidUuidFieldValidation implements IValidation {
 
     const isValidUuid = uuidRegExp.test(String(input[this.fieldName] ?? ''));
 
-    console.log(input);
-    console.log(isValidUuid);
-
     if (!isValidUuid) {
       return new InvalidUuidFieldError(this.fieldName);
     }
