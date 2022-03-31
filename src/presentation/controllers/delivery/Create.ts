@@ -29,7 +29,7 @@ class CreateDeliveryController implements IController {
       const { item_name } = request.body;
 
       const delivery = await this.createDeliveryUseCase.execute({
-        client_id: '',
+        client_id: String(request.client_id),
         item_name,
       });
 
