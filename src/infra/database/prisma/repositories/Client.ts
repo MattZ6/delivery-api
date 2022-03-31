@@ -1,7 +1,8 @@
 import {
+  ICheckIfClientExistsByIdRepository,
   ICheckIfClientExistsByUsernameRepository,
   ICreateClientRepository,
-  IFindClientByUsername,
+  IFindClientByUsernameRepository,
 } from '@application/protocols/repositories/client';
 
 import { prisma } from '..';
@@ -10,7 +11,8 @@ export class PostgresClientsRepository
   implements
     ICheckIfClientExistsByUsernameRepository,
     ICreateClientRepository,
-    IFindClientByUsername
+    IFindClientByUsernameRepository,
+    ICheckIfClientExistsByIdRepository
 {
   async checkIfExistsByUsername(
     data: ICheckIfClientExistsByUsernameRepository.Input
@@ -45,8 +47,8 @@ export class PostgresClientsRepository
   }
 
   async findByUsername(
-    data: IFindClientByUsername.Input
-  ): Promise<IFindClientByUsername.Output> {
+    data: IFindClientByUsernameRepository.Input
+  ): Promise<IFindClientByUsernameRepository.Output> {
     const { username } = data;
 
     const client = await prisma.client.findFirst({
@@ -59,5 +61,19 @@ export class PostgresClientsRepository
     });
 
     return client;
+  }
+
+  async checkIfExistsById(
+    data: ICheckIfClientExistsByIdRepository.Input
+  ): Promise<ICheckIfClientExistsByIdRepository.Output> {
+    const { id } = data;
+
+    const count = await prisma.client.count({
+      where: {
+        id,
+      },
+    });
+
+    return count > 0;
   }
 }
