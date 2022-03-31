@@ -13,6 +13,7 @@ model Deliveryman {
   password_hash String
 
   deliveries Delivery[]
+  tokens     DeliverymanToken[]
 
   @@map("deliverymans")
 }
@@ -62,4 +63,16 @@ model ClientToken {
   updated_at DateTime @default(now()) @updatedAt
 
   @@map("client_tokens")
+}
+
+model DeliverymanToken {
+  id             String      @id @default(uuid())
+  token          String
+  deliveryman_id String
+  deliveryman    Deliveryman @relation(fields: [deliveryman_id], references: [id])
+  expires_in     DateTime
+  created_at     DateTime    @default(now())
+  updated_at     DateTime    @default(now()) @updatedAt
+
+  @@map("deliveryman_tokens")
 }

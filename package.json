@@ -1,12 +1,14 @@
 {
-  "name": "delivery",
-  "version": "0.0.0",
+  "name": "delivery-api",
+  "version": "0.1.0",
   "license": "MIT",
   "author": {
     "name": "Matheus Felipe Zanin",
     "email": "matt_z6@hotmail.com",
     "url": "https://github.com/MattZ6"
   },
+  "repository": "https://github.com/MattZ6/delivery-api",
+  "bugs": "https://github.com/MattZ6/delivery-api/issues",
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --exit-child --transpile-only --ignore-watch node_modules src/main/server.ts",
     "docker:up": "docker-compose up -d",

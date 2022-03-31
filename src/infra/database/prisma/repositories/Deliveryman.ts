@@ -1,6 +1,7 @@
 import {
   ICheckIfDeliverymanExistsByUsernameRepository,
   ICreateDeliverymanRepository,
+  IFindDeliverymanByUsername,
 } from '@application/protocols/repositories/deliveryman';
 
 import { prisma } from '..';
@@ -8,7 +9,8 @@ import { prisma } from '..';
 export class PostgresDeliverymansRepository
   implements
     ICheckIfDeliverymanExistsByUsernameRepository,
-    ICreateDeliverymanRepository
+    ICreateDeliverymanRepository,
+    IFindDeliverymanByUsername
 {
   async checkIfExistsByUsername(
     data: ICheckIfDeliverymanExistsByUsernameRepository.Input
@@ -32,13 +34,30 @@ export class PostgresDeliverymansRepository
   ): Promise<ICreateDeliverymanRepository.Output> {
     const { username, password_hash } = data;
 
-    const Deliveryman = await prisma.deliveryman.create({
+    const deliveryman = await prisma.deliveryman.create({
       data: {
         username,
         password_hash,
       },
     });
 
-    return Deliveryman;
+    return deliveryman;
+  }
+
+  async findByUsername(
+    data: IFindDeliverymanByUsername.Input
+  ): Promise<IFindDeliverymanByUsername.Output> {
+    const { username } = data;
+
+    const deliveryman = await prisma.deliveryman.findFirst({
+      where: {
+        username: {
+          equals: username,
+          mode: 'insensitive',
+        },
+      },
+    });
+
+    return deliveryman;
   }
 }
