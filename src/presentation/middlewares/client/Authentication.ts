@@ -39,7 +39,9 @@ class ClientAuthenticationMiddleware implements IMiddleware {
         throw new PermissionDeniedError();
       }
 
-      return ok({ user_id: subject });
+      return ok<ClientAuthenticationMiddleware.ResponseBody>({
+        client_id: subject,
+      });
     } catch (error) {
       if (error instanceof AccessTokenNotProvidedError) {
         return unauthorized(error);
@@ -70,6 +72,10 @@ namespace ClientAuthenticationMiddleware {
   export type Request = IHttpRequest<unknown, unknown, unknown, RequestHeaders>;
 
   export type Response = IHttpResponse;
+
+  export type ResponseBody = {
+    client_id: string;
+  };
 
   export type TokenPayload = {
     role?: 'client' | 'deliveryman';
