@@ -1,4 +1,5 @@
 import {
+  ICheckIfDeliverymanExistsByIdRepository,
   ICheckIfDeliverymanExistsByUsernameRepository,
   ICreateDeliverymanRepository,
   IFindDeliverymanByUsername,
@@ -10,7 +11,8 @@ export class PostgresDeliverymansRepository
   implements
     ICheckIfDeliverymanExistsByUsernameRepository,
     ICreateDeliverymanRepository,
-    IFindDeliverymanByUsername
+    IFindDeliverymanByUsername,
+    ICheckIfDeliverymanExistsByIdRepository
 {
   async checkIfExistsByUsername(
     data: ICheckIfDeliverymanExistsByUsernameRepository.Input
@@ -59,5 +61,17 @@ export class PostgresDeliverymansRepository
     });
 
     return deliveryman;
+  }
+
+  async checkIfExistsById(
+    data: ICheckIfDeliverymanExistsByIdRepository.Input
+  ): Promise<ICheckIfDeliverymanExistsByIdRepository.Output> {
+    const { id } = data;
+
+    const count = await prisma.deliveryman.count({
+      where: { id },
+    });
+
+    return count > 0;
   }
 }
