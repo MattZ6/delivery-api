@@ -10,6 +10,7 @@ export interface IHttpRequest<
   H = unknown
 > {
   client_id?: string;
+  deliveryman_id?: string;
   body: B;
   params: P;
   query: Q;
