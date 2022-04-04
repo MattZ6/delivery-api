@@ -1,6 +1,6 @@
 import { FindAllAvailableDeliveriesController } from '@presentation/controllers/delivery/FindAllAvailable';
 import {
-  FieldOneOfValidation,
+  OneOfValuesFieldValidation,
   MaxValueFieldValidation,
   MinValueFieldValidation,
   OnlyNumbersFieldValidation,
@@ -15,11 +15,11 @@ export function makeFindAllAvailableDeliveriesControllerValidation(): Validation
   type Order = FindAllAvailableDeliveriesController.Order;
 
   return new ValidationComposite<Input>([
-    new FieldOneOfValidation<Input, SortBy>('sort_by', [
+    new OneOfValuesFieldValidation<Input, SortBy>('sort_by', [
       'created_at',
       'item_name',
     ]),
-    new FieldOneOfValidation<Input, Order>('order', ['asc', 'desc']),
+    new OneOfValuesFieldValidation<Input, Order>('order', ['asc', 'desc']),
     new OnlyNumbersFieldValidation('limit'),
     new MinValueFieldValidation('limit', deliveryConfig.MIN_LIMIT),
     new MaxValueFieldValidation('limit', deliveryConfig.MAX_LIMIT),

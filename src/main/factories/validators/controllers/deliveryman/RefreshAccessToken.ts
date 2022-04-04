@@ -2,7 +2,7 @@ import type { RefreshDeliverymanAccessTokenController } from '@presentation/cont
 import {
   RequiredFieldValidation,
   ValidationComposite,
-  ValidUuidFieldValidation,
+  UuidFieldValidation,
 } from '@presentation/validations/validators';
 
 export function makeRefreshDeliverymanAccessTokenControllerValidation(): ValidationComposite {
@@ -10,6 +10,6 @@ export function makeRefreshDeliverymanAccessTokenControllerValidation(): Validat
 
   return new ValidationComposite<Input>([
     new RequiredFieldValidation('refresh_token'),
-    new ValidUuidFieldValidation('refresh_token'),
+    new UuidFieldValidation('refresh_token'),
   ]);
 }

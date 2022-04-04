@@ -1,5 +1,5 @@
 import { IValidation } from '@presentation/protocols';
-import { DivergentFieldsValuesError } from '@presentation/validations/errors';
+import { DivergentValuesFieldError } from '@presentation/validations/errors';
 
 export class CompareFieldsValidation<I = unknown> implements IValidation<I> {
   constructor(
@@ -9,7 +9,7 @@ export class CompareFieldsValidation<I = unknown> implements IValidation<I> {
 
   validate(input: I) {
     if (input[this.fieldName] !== input[this.fieldToCompareName]) {
-      return new DivergentFieldsValuesError(
+      return new DivergentValuesFieldError(
         String(this.fieldName),
         String(this.fieldToCompareName)
       );

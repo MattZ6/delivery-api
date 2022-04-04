@@ -1,7 +1,7 @@
 import { IValidation } from '@presentation/protocols';
 import { InvalidUuidFieldError } from '@presentation/validations/errors';
 
-export class ValidUuidFieldValidation<I = unknown> implements IValidation<I> {
+export class UuidFieldValidation<I = unknown> implements IValidation<I> {
   constructor(private readonly fieldName: keyof I) {}
 
   validate(input: I) {

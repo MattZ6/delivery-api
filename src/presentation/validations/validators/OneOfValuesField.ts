@@ -1,8 +1,8 @@
 import { IValidation } from '@presentation/protocols';
 
-import { FieldIsNotOneOfValuesError } from '../errors';
+import { IsNotOneOfValuesFieldError } from '../errors';
 
-export class FieldOneOfValidation<I = unknown, O = unknown>
+export class OneOfValuesFieldValidation<I = unknown, O = unknown>
   implements IValidation<I>
 {
   constructor(
@@ -22,7 +22,7 @@ export class FieldOneOfValidation<I = unknown, O = unknown>
     );
 
     if (isOneOf) {
-      throw new FieldIsNotOneOfValuesError(
+      throw new IsNotOneOfValuesFieldError(
         String(this.fieldName),
         this.possibleValues
       );
