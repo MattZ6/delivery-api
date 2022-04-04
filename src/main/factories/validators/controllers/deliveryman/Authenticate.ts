@@ -1,3 +1,4 @@
+import type { AuthenticateDeliverymanController } from '@presentation/controllers/deliveryman/Authenticate';
 import {
   MinLengthFieldValidation,
   RequiredFieldValidation,
@@ -5,7 +6,9 @@ import {
 } from '@presentation/validations/validators';
 
 export function makeAuthenticateDeliverymanControllerValidation(): ValidationComposite {
-  return new ValidationComposite([
+  type Input = AuthenticateDeliverymanController.RequestBody;
+
+  return new ValidationComposite<Input>([
     new RequiredFieldValidation('username'),
     new MinLengthFieldValidation('username', 3, true),
     new RequiredFieldValidation('password'),

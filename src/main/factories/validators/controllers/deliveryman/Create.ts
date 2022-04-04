@@ -1,3 +1,4 @@
+import type { CreateDeliverymanController } from '@presentation/controllers/deliveryman/Create';
 import {
   MinLengthFieldValidation,
   RequiredFieldValidation,
@@ -6,7 +7,11 @@ import {
 } from '@presentation/validations/validators';
 
 export function makeCreateDeliverymanControllerValidation(): ValidationComposite {
-  return new ValidationComposite([
+  type Input = CreateDeliverymanController.RequestBody & {
+    password_confirmation: string;
+  };
+
+  return new ValidationComposite<Input>([
     new RequiredFieldValidation('username'),
     new MinLengthFieldValidation('username', 3, true),
     new RequiredFieldValidation('password'),
