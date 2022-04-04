@@ -10,7 +10,7 @@ const routes = Router();
 routes.post('/sign/in', adaptRoute(makeAuthenticateDeliverymanController()));
 routes.post('/sign/up', adaptRoute(makeCreateDeliverymanController()));
 routes.post(
-  '/auth/refresh',
+  '/refresh',
   adaptRoute(makeRefreshDeliverymanAccessTokenController())
 );
 

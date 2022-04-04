@@ -9,9 +9,6 @@ const routes = Router();
 
 routes.post('/sign/in', adaptRoute(makeAuthenticateClientController()));
 routes.post('/sign/up', adaptRoute(makeCreateClientController()));
-routes.post(
-  '/auth/refresh',
-  adaptRoute(makeRefreshClientAccessTokenController())
-);
+routes.post('/refresh', adaptRoute(makeRefreshClientAccessTokenController()));
 
 export default routes;
