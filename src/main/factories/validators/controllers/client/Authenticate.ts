@@ -1,3 +1,4 @@
+import type { AuthenticateClientController } from '@presentation/controllers/client/Authenticate';
 import {
   MinLengthFieldValidation,
   RequiredFieldValidation,
@@ -5,7 +6,9 @@ import {
 } from '@presentation/validations/validators';
 
 export function makeAuthenticateClientControllerValidation(): ValidationComposite {
-  return new ValidationComposite([
+  type Input = AuthenticateClientController.RequestBody;
+
+  return new ValidationComposite<Input>([
     new RequiredFieldValidation('username'),
     new MinLengthFieldValidation('username', 3, true),
     new RequiredFieldValidation('password'),

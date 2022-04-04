@@ -1,10 +1,10 @@
 import { ValidationError } from './Validation';
 
-export class FieldIsNotOneOfValuesError extends ValidationError {
+export class IsNotOneOfValuesFieldError extends ValidationError {
   constructor(fieldName: string, possibleValues: any[]) {
     const message = `The value of the ${fieldName} field is not one of ${possibleValues.join(
       ', '
-    )} values.`;
+    )} values`;
 
     super(fieldName, 'invalid', message);
     super.message = message;

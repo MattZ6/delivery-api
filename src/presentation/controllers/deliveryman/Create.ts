@@ -49,7 +49,7 @@ class CreateDeliverymanController implements IController {
 }
 
 namespace CreateDeliverymanController {
-  type RequestBody = {
+  export type RequestBody = {
     username: string;
     password: string;
   };

@@ -1,10 +1,13 @@
 import { IValidation } from '@presentation/protocols';
 import { MaxValueFieldError } from '@presentation/validations/errors';
 
-export class MaxValueFieldValidation<F = string> implements IValidation {
-  constructor(private readonly fieldName: F, private readonly max: number) {}
+export class MaxValueFieldValidation<I = unknown> implements IValidation<I> {
+  constructor(
+    private readonly fieldName: keyof I,
+    private readonly max: number
+  ) {}
 
-  validate(input: any) {
+  validate(input: I) {
     const value = String(input[this.fieldName] ?? '').trim();
 
     if (!value.length) {

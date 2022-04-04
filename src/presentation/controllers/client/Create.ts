@@ -49,7 +49,7 @@ class CreateClientController implements IController {
 }
 
 namespace CreateClientController {
-  type RequestBody = {
+  export type RequestBody = {
     username: string;
     password: string;
   };

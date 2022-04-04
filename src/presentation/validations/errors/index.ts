@@ -1,5 +1,5 @@
-export * from './DivergentFieldsValues';
-export * from './FieldValueIsNotOneOf';
+export * from './DivergentValuesField';
+export * from './IsNotOneOfValuesField';
 export * from './InvalidUuidField';
 export * from './MaxValueField';
 export * from './MinLengthField';

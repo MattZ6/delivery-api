@@ -61,7 +61,7 @@ class AuthenticateClientController implements IController {
 }
 
 namespace AuthenticateClientController {
-  type RequestBody = {
+  export type RequestBody = {
     username: string;
     password: string;
   };

@@ -44,6 +44,7 @@ export function noContent(): IHttpResponse<void> {
 type ValidationErrorData = {
   field?: string;
   type?: string;
+  value?: string | number;
   message: string;
 };
 
@@ -62,6 +63,7 @@ export function badRequest(
       validation: {
         field: error.field,
         type: error.type,
+        value: error.value,
         message: error.message,
       },
     },

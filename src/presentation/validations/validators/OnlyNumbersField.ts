@@ -1,10 +1,10 @@
 import { IValidation } from '@presentation/protocols';
 import { OnlyNumbersFieldError } from '@presentation/validations/errors';
 
-export class OnlyNumbersFieldValidation<F = string> implements IValidation {
-  constructor(private readonly fieldName: F) {}
+export class OnlyNumbersFieldValidation<I = unknown> implements IValidation<I> {
+  constructor(private readonly fieldName: keyof I) {}
 
-  validate(input: any) {
+  validate(input: I) {
     const value = String(input[this.fieldName] ?? '').trim();
 
     if (!value.length) {

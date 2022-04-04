@@ -1,9 +1,9 @@
 import { IValidation } from '@presentation/protocols';
 
-export class ValidationComposite implements IValidation {
-  constructor(private readonly validations: IValidation[]) {}
+export class ValidationComposite<I = unknown> implements IValidation<I> {
+  constructor(private readonly validations: IValidation<I>[]) {}
 
-  validate(input: any) {
+  validate(input: I) {
     const validation = this.validations.find(
       validation => !!validation.validate(input)
     );

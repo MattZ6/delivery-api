@@ -49,7 +49,7 @@ class CreateDeliveryController implements IController {
 }
 
 namespace CreateDeliveryController {
-  type RequestBody = {
+  export type RequestBody = {
     item_name: string;
   };
 

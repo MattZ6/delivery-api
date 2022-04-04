@@ -1,10 +1,13 @@
 import { IValidation } from '@presentation/protocols';
 import { MinValueFieldError } from '@presentation/validations/errors';
 
-export class MinValueFieldValidation<F = string> implements IValidation {
-  constructor(private readonly fieldName: F, private readonly min: number) {}
+export class MinValueFieldValidation<I = unknown> implements IValidation<I> {
+  constructor(
+    private readonly fieldName: keyof I,
+    private readonly min: number
+  ) {}
 
-  validate(input: any) {
+  validate(input: I) {
     const value = String(input[this.fieldName] ?? '').trim();
 
     if (!value.length) {
