@@ -1,8 +1,13 @@
-import { ICreateDeliveryRepository } from '@application/protocols/repositories/delivery';
+import {
+  ICreateDeliveryRepository,
+  IFindAllAvailableDeliveriesRepository,
+} from '@application/protocols/repositories/delivery';
 
 import { prisma } from '..';
 
-export class PostgresDeliveriesRepository implements ICreateDeliveryRepository {
+export class PostgresDeliveriesRepository
+  implements ICreateDeliveryRepository, IFindAllAvailableDeliveriesRepository
+{
   async create(
     data: ICreateDeliveryRepository.Input
   ): Promise<ICreateDeliveryRepository.Output> {
@@ -16,5 +21,24 @@ export class PostgresDeliveriesRepository implements ICreateDeliveryRepository {
     });
 
     return delivery;
+  }
+
+  async findAllAvailable(
+    data: IFindAllAvailableDeliveriesRepository.Input
+  ): Promise<IFindAllAvailableDeliveriesRepository.Output> {
+    const { sort_by, order, take, skip } = data;
+
+    const deliveries = await prisma.delivery.findMany({
+      where: {
+        deliveryman_id: null,
+      },
+      orderBy: {
+        [sort_by]: order,
+      },
+      take,
+      skip,
+    });
+
+    return deliveries;
   }
 }
