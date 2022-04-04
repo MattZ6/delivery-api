@@ -2,6 +2,7 @@ import {
   ICreateDeliveryRepository,
   IFindAllAvailableDeliveriesRepository,
   IFindAllDeliveriesFromClientRepository,
+  IFindAllDeliveriesFromDeliverymanRepository,
   IFindDeliveryByIdRepository,
   IUpdateDeliveryRepository,
 } from '@application/protocols/repositories/delivery';
@@ -14,7 +15,8 @@ export class PostgresDeliveriesRepository
     IFindAllAvailableDeliveriesRepository,
     IFindDeliveryByIdRepository,
     IUpdateDeliveryRepository,
-    IFindAllDeliveriesFromClientRepository
+    IFindAllDeliveriesFromClientRepository,
+    IFindAllDeliveriesFromDeliverymanRepository
 {
   async create(
     data: ICreateDeliveryRepository.Input
@@ -83,9 +85,36 @@ export class PostgresDeliveriesRepository
   ): Promise<IFindAllDeliveriesFromClientRepository.Output> {
     const { client_id, sort_by, order, take, skip } = data;
 
+    console.log();
+    console.log(data);
+    console.log();
+
     const deliveries = await prisma.delivery.findMany({
       where: {
-        client_id,
+        client_id: {
+          equals: client_id,
+        },
+      },
+      orderBy: {
+        [sort_by]: order,
+      },
+      take,
+      skip,
+    });
+
+    return deliveries;
+  }
+
+  async findAllFromDeliveryman(
+    data: IFindAllDeliveriesFromDeliverymanRepository.Input
+  ): Promise<IFindAllDeliveriesFromDeliverymanRepository.Output> {
+    const { deliveryman_id, sort_by, order, take, skip } = data;
+
+    const deliveries = await prisma.delivery.findMany({
+      where: {
+        deliveryman_id: {
+          equals: deliveryman_id,
+        },
       },
       orderBy: {
         [sort_by]: order,

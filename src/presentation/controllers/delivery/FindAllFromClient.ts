@@ -27,7 +27,13 @@ class FindAllDeliveriesFromClientController implements IController {
       }
 
       const clientDeliveries =
-        await this.findAllDeliveriesFromClientUseCase.execute(request.query);
+        await this.findAllDeliveriesFromClientUseCase.execute({
+          client_id: String(request.client_id),
+          sort_by: request.query.sort_by,
+          order: request.query.order,
+          limit: request.query.limit,
+          offset: request.query.offset,
+        });
 
       return ok(clientDeliveries);
     } catch (error) {
