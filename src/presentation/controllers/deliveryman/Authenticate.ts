@@ -61,7 +61,7 @@ class AuthenticateDeliverymanController implements IController {
 }
 
 namespace AuthenticateDeliverymanController {
-  type RequestBody = {
+  export type RequestBody = {
     username: string;
     password: string;
   };

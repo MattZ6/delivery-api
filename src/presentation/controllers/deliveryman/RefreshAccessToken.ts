@@ -60,7 +60,7 @@ class RefreshDeliverymanAccessTokenController implements IController {
 }
 
 namespace RefreshDeliverymanAccessTokenController {
-  type RequestBody = {
+  export type RequestBody = {
     refresh_token: string;
   };
 

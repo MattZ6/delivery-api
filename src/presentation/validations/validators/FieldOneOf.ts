@@ -2,15 +2,15 @@ import { IValidation } from '@presentation/protocols';
 
 import { FieldIsNotOneOfValuesError } from '../errors';
 
-export class FieldOneOfValidation<F = string, O = string>
-  implements IValidation
+export class FieldOneOfValidation<I = unknown, O = unknown>
+  implements IValidation<I>
 {
   constructor(
-    private readonly fieldName: F,
+    private readonly fieldName: keyof I,
     private readonly possibleValues: O[]
   ) {}
 
-  validate(input: any) {
+  validate(input: I) {
     if (input[this.fieldName] === undefined || input[this.fieldName] === null) {
       return null;
     }
