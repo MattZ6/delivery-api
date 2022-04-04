@@ -1,12 +1,18 @@
 import {
   ICreateDeliveryRepository,
   IFindAllAvailableDeliveriesRepository,
+  IFindDeliveryByIdRepository,
+  IUpdateDeliveryRepository,
 } from '@application/protocols/repositories/delivery';
 
 import { prisma } from '..';
 
 export class PostgresDeliveriesRepository
-  implements ICreateDeliveryRepository, IFindAllAvailableDeliveriesRepository
+  implements
+    ICreateDeliveryRepository,
+    IFindAllAvailableDeliveriesRepository,
+    IFindDeliveryByIdRepository,
+    IUpdateDeliveryRepository
 {
   async create(
     data: ICreateDeliveryRepository.Input
@@ -40,5 +46,33 @@ export class PostgresDeliveriesRepository
     });
 
     return deliveries;
+  }
+
+  async findById(
+    data: IFindDeliveryByIdRepository.Input
+  ): Promise<IFindDeliveryByIdRepository.Output> {
+    const { id } = data;
+
+    const delivery = await prisma.delivery.findUnique({ where: { id } });
+
+    return delivery;
+  }
+
+  async update(
+    data: IUpdateDeliveryRepository.Input
+  ): Promise<IUpdateDeliveryRepository.Output> {
+    const { id, deliveryman_id, delivered_at } = data;
+
+    const delivery = await prisma.delivery.update({
+      where: {
+        id,
+      },
+      data: {
+        deliveryman_id,
+        delivered_at,
+      },
+    });
+
+    return delivery;
   }
 }
