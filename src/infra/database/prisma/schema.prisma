@@ -8,9 +8,11 @@ datasource db {
 }
 
 model Deliveryman {
-  id            String @id @default(uuid())
-  username      String @unique
+  id            String   @id @default(uuid())
+  username      String   @unique
   password_hash String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   deliveries Delivery[]
   tokens     DeliverymanToken[]
@@ -19,9 +21,11 @@ model Deliveryman {
 }
 
 model Client {
-  id            String @id @default(uuid())
-  username      String @unique
+  id            String   @id @default(uuid())
+  username      String   @unique
   password_hash String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   deliveries Delivery[]
   tokens     ClientToken[]
@@ -37,7 +41,8 @@ model Delivery {
   client         Client       @relation(fields: [client_id], references: [id])
   item_name      String
   created_at     DateTime     @default(now())
-  delivered_at   DateTime?    @default(now())
+  updated_at     DateTime     @updatedAt
+  delivered_at   DateTime?
 
   @@map("deliveries")
 }
@@ -60,7 +65,7 @@ model ClientToken {
   client     Client   @relation(fields: [client_id], references: [id])
   expires_in DateTime
   created_at DateTime @default(now())
-  updated_at DateTime @default(now()) @updatedAt
+  updated_at DateTime @updatedAt
 
   @@map("client_tokens")
 }
@@ -72,7 +77,7 @@ model DeliverymanToken {
   deliveryman    Deliveryman @relation(fields: [deliveryman_id], references: [id])
   expires_in     DateTime
   created_at     DateTime    @default(now())
-  updated_at     DateTime    @default(now()) @updatedAt
+  updated_at     DateTime    @updatedAt
 
   @@map("deliveryman_tokens")
 }
