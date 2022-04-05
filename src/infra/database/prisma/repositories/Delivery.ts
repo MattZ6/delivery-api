@@ -85,10 +85,6 @@ export class PostgresDeliveriesRepository
   ): Promise<IFindAllDeliveriesFromClientRepository.Output> {
     const { client_id, sort_by, order, take, skip } = data;
 
-    console.log();
-    console.log(data);
-    console.log();
-
     const deliveries = await prisma.delivery.findMany({
       where: {
         client_id: {

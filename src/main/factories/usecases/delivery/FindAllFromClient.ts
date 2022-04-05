@@ -1,4 +1,4 @@
-import { FindAllDeliveriesFromClientUseCase } from '@application/usecases/delivery/FinaAllFromClient';
+import { FindAllDeliveriesFromClientUseCase } from '@application/usecases/delivery/FindAllFromClient';
 
 import { deliveryConfig } from '@main/config/env/delivery';
 import { makeClientsRepository } from '@main/factories/repositories/Client';
