@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import { adaptMiddleware } from '@main/adapters/express/middlewareAdapter';
 import { adaptRoute } from '@main/adapters/express/routeAdapter';
+import { makeDeliverDeliveryController } from '@main/factories/controllers/delivery/Deliver';
 import { makeFindAllAvailableDeliveriesController } from '@main/factories/controllers/delivery/FindAllAvailable';
 import { makeFindAllDeliveriesFromDeliverymanController } from '@main/factories/controllers/delivery/FindAllFromDeliveryman';
 import { makeStartDeliveryController } from '@main/factories/controllers/delivery/Start';
@@ -25,6 +26,12 @@ routes.get(
   '/me/deliveries',
   adaptMiddleware(makeDeliverymanAuthenticationMiddleware()),
   adaptRoute(makeFindAllDeliveriesFromDeliverymanController())
+);
+
+routes.get(
+  '/me/deliveries/:delivery_id/deliver',
+  adaptMiddleware(makeDeliverymanAuthenticationMiddleware()),
+  adaptRoute(makeDeliverDeliveryController())
 );
 
 export default routes;
