@@ -66,7 +66,7 @@ namespace AuthenticateClientController {
     password: string;
   };
 
-  export type Request = IHttpRequest<RequestBody>;
+  export type Request = IHttpRequest<RequestBody, void, void, void>;
 
   export type Response = IHttpResponse;
 }
