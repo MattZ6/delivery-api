@@ -28,7 +28,7 @@ routes.get(
   adaptRoute(makeFindAllDeliveriesFromDeliverymanController())
 );
 
-routes.get(
+routes.post(
   '/me/deliveries/:delivery_id/deliver',
   adaptMiddleware(makeDeliverymanAuthenticationMiddleware()),
   adaptRoute(makeDeliverDeliveryController())

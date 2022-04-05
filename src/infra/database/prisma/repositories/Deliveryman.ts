@@ -69,7 +69,11 @@ export class PostgresDeliverymansRepository
     const { id } = data;
 
     const count = await prisma.deliveryman.count({
-      where: { id },
+      where: {
+        id: {
+          equals: id,
+        },
+      },
     });
 
     return count > 0;

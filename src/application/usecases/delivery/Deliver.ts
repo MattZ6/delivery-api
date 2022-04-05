@@ -2,6 +2,7 @@ import {
   DeliveryAlreadyFinishedError,
   DeliverymanNotFoundWithProvidedIdError,
   DeliveryNotFoundWithProvidedIdError,
+  DeliveryNotStartedError,
   DeliveryStartedByAnotherDeliverymanError,
 } from '@domain/errors';
 import { IDeliverDeliveryUseCase } from '@domain/usecases/delivery/Deliver';
@@ -32,9 +33,13 @@ export class DeliverDeliveryUseCase implements IDeliverDeliveryUseCase {
       throw new DeliveryNotFoundWithProvidedIdError();
     }
 
+    if (!delivery.deliveryman_id) {
+      throw new DeliveryNotStartedError();
+    }
+
     const deliverymanExists =
       await this.checkIfDeliverymanExistsByIdRepository.checkIfExistsById({
-        id: delivery_id,
+        id: deliveryman_id,
       });
 
     if (!deliverymanExists) {

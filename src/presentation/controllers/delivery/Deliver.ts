@@ -2,6 +2,7 @@ import {
   DeliveryAlreadyFinishedError,
   DeliverymanNotFoundWithProvidedIdError,
   DeliveryNotFoundWithProvidedIdError,
+  DeliveryNotStartedError,
   DeliveryStartedByAnotherDeliverymanError,
 } from '@domain/errors';
 import { IDeliverDeliveryUseCase } from '@domain/usecases/delivery/Deliver';
@@ -12,6 +13,7 @@ import {
   forbidden,
   noContent,
   notFound,
+  unprocessableEntity,
 } from '@presentation/helpers/http';
 import {
   IController,
@@ -52,6 +54,10 @@ class DeliverDeliveryController implements IController {
 
       if (error instanceof DeliveryNotFoundWithProvidedIdError) {
         return notFound(error);
+      }
+
+      if (error instanceof DeliveryNotStartedError) {
+        return unprocessableEntity(error);
       }
 
       if (error instanceof DeliverymanNotFoundWithProvidedIdError) {
