@@ -15,6 +15,8 @@ services:
       - POSTGRES_DB=${DATABASE_NAME}
     volumes:
       - pgdata:/data/postgres
+    networks:
+      - net
 
   # Application
   api:
@@ -29,6 +31,12 @@ services:
       - database
     links:
       - database
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
 
 volumes:
   pgdata:
