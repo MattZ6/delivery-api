@@ -4,5 +4,6 @@ export type Delivery = {
   client_id: string;
   deliveryman_id?: string | null;
   created_at: Date;
+  updated_at: Date;
   delivered_at?: Date | null;
 };
