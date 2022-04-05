@@ -7,9 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  run:
-    name: Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  build:
 
     strategy:
       matrix:
