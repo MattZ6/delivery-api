@@ -24,9 +24,6 @@ export class FindAllDeliveriesFromDeliverymanUseCase
         id: data.deliveryman_id,
       });
 
-    console.log('---------');
-    console.log(deliverymanExists);
-
     if (!deliverymanExists) {
       throw new DeliveryNotFoundWithProvidedIdError();
     }
