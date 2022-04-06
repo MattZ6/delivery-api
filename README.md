@@ -6,6 +6,8 @@
   > API para acompanhamento de entregas, construída na trilha de Node JS como conteúdo adicional do bootcamp Ignite da Rocketseat.
 
   <strong>🚧 Sendo desenvolvida... 🚧</strong>
+
+  ![build-image] ![coveralls-image]
 </div>
 
 ## 💡 Você vai precisar
@@ -108,3 +110,6 @@ ___
 <div align="center">
   <strong>Ignite Bootcamp 🔥</strong>
 </div>
+
+[build-image]: https://img.shields.io/github/workflow/status/mattz6/delivery-api/Node.js/main?&style=for-the-badge&labelColor=232320
+[coveralls-image]: https://img.shields.io/coveralls/github/MattZ6/delivery-api/main?&style=for-the-badge&labelColor=232320
