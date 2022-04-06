@@ -32,9 +32,11 @@ export class CreateClientUseCase implements ICreateClientUseCase {
       value: password,
     });
 
-    return this.createClientRepository.create({
+    const newClient = await this.createClientRepository.create({
       username,
       password_hash: passwordHash,
     });
+
+    return newClient;
   }
 }
