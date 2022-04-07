@@ -1,4 +1,5 @@
 import {
+  ICheckIfDeliverymanExistsByIdRepository,
   ICheckIfDeliverymanExistsByUsernameRepository,
   ICreateDeliverymanRepository,
   IFindDeliverymanByUsernameRepository,
@@ -45,5 +46,15 @@ export class CreateDeliverymanRepositorySpy
     Object.assign(deliverymanMock, { username, password_hash });
 
     return deliverymanMock;
+  }
+}
+
+export class CheckIfDeliverymanExistsByIdRepositorySpy
+  implements ICheckIfDeliverymanExistsByIdRepository
+{
+  async checkIfExistsById(
+    _: ICheckIfDeliverymanExistsByIdRepository.Input
+  ): Promise<ICheckIfDeliverymanExistsByIdRepository.Output> {
+    return true;
   }
 }

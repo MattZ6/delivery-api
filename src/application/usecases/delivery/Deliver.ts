@@ -54,11 +54,11 @@ export class DeliverDeliveryUseCase implements IDeliverDeliveryUseCase {
       throw new DeliveryAlreadyFinishedError();
     }
 
-    const deliveredAt = Date.now();
+    const deliveredAt = new Date(Date.now());
 
     const updatedDelivery = await this.updateDeliveryRepository.update({
       id: delivery_id,
-      delivered_at: new Date(deliveredAt),
+      delivered_at: deliveredAt,
     });
 
     return updatedDelivery;
