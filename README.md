@@ -7,7 +7,7 @@
 
   <strong>🚧 Sendo desenvolvida... 🚧</strong>
 
-  ![build-image] ![coveralls-image]
+  [![build-image]][build-url] [![coveralls-image]][coveralls-url] [![license-image]][license-url]
 </div>
 
 ## 💡 Você vai precisar
@@ -111,5 +111,11 @@ ___
   <strong>Ignite Bootcamp 🔥</strong>
 </div>
 
-[build-image]: https://img.shields.io/github/workflow/status/mattz6/delivery-api/Node.js/main?&style=for-the-badge&labelColor=232320
-[coveralls-image]: https://img.shields.io/coveralls/github/MattZ6/delivery-api/main?&style=for-the-badge&labelColor=232320
+[license-url]: LICENSE.md
+[license-image]: https://img.shields.io/github/license/MattZ6/delivery-api?color=303030&labelColor=232320&style=for-the-badge
+
+[build-image]: https://img.shields.io/github/workflow/status/MattZ6/delivery-api/Node.js/main?style=for-the-badge&labelColor=232320
+[build-url]: https://github.com/MattZ6/delivery-api/actions
+
+[coveralls-image]: https://img.shields.io/coveralls/github/MattZ6/delivery-api/main?style=for-the-badge&labelColor=232320
+[coveralls-url]: https://coveralls.io/github/MattZ6/delivery-api?branch=main
