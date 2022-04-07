@@ -1,4 +1,4 @@
-import { ICreateClientUseCase } from '@domain/usecases/clients/Create';
+import { ICreateClientUseCase } from '@domain/usecases/client/Create';
 
 import { makeClientMock } from '../../../../domain';
 

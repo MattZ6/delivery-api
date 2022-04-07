@@ -1,4 +1,4 @@
-import { IAuthenticateClientUseCase } from '@domain/usecases/clients/Authenticate';
+import { IAuthenticateClientUseCase } from '@domain/usecases/client/Authenticate';
 
 import { makeAuthenticationMock } from '../../../../domain';
 

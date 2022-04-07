@@ -2,7 +2,7 @@ import {
   ClientNotFoundWithProvidedUsernameError,
   WrongPasswordError,
 } from '@domain/errors';
-import { IAuthenticateClientUseCase } from '@domain/usecases/clients/Authenticate';
+import { IAuthenticateClientUseCase } from '@domain/usecases/client/Authenticate';
 
 import {
   badRequest,

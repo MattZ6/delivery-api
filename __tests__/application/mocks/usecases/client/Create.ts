@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { ICreateClientUseCase } from '@domain/usecases/clients/Create';
+import { ICreateClientUseCase } from '@domain/usecases/client/Create';
 
 export function makeCreateClientUseCaseInputMock(): ICreateClientUseCase.Input {
   return {

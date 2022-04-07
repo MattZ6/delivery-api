@@ -2,7 +2,7 @@ import {
   ClientTokenExpiredError,
   ClientTokenNotFoundWithProvidedTokenError,
 } from '@domain/errors';
-import { IRefreshClientAccessTokenUseCase } from '@domain/usecases/clients/RefreshAccessToken';
+import { IRefreshClientAccessTokenUseCase } from '@domain/usecases/client/RefreshAccessToken';
 
 import { IEncryptProvider } from '@application/protocols/providers/cryptography/cryptography';
 import { IGenerateUuidProvider } from '@application/protocols/providers/uuid';

@@ -1,4 +1,4 @@
-import { IRefreshClientAccessTokenUseCase } from '@domain/usecases/clients/RefreshAccessToken';
+import { IRefreshClientAccessTokenUseCase } from '@domain/usecases/client/RefreshAccessToken';
 
 import { makeAuthenticationMock } from '../../../../domain';
 

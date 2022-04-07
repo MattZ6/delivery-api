@@ -2,7 +2,7 @@ import {
   ClientNotFoundWithProvidedUsernameError,
   WrongPasswordError,
 } from '@domain/errors';
-import { IAuthenticateClientUseCase } from '@domain/usecases/clients/Authenticate';
+import { IAuthenticateClientUseCase } from '@domain/usecases/client/Authenticate';
 
 import { IEncryptProvider } from '@application/protocols/providers/cryptography/cryptography';
 import { ICompareHashProvider } from '@application/protocols/providers/cryptography/hash';

@@ -1,5 +1,5 @@
 import { ClientAlreadyExistsWithProvidedUsernameError } from '@domain/errors';
-import { ICreateClientUseCase } from '@domain/usecases/clients/Create';
+import { ICreateClientUseCase } from '@domain/usecases/client/Create';
 
 import { created, badRequest, conflict } from '@presentation/helpers/http';
 import {
