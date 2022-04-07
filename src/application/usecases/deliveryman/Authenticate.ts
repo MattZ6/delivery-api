@@ -8,15 +8,15 @@ import { IEncryptProvider } from '@application/protocols/providers/cryptography/
 import { ICompareHashProvider } from '@application/protocols/providers/cryptography/hash';
 import { IGenerateUuidProvider } from '@application/protocols/providers/uuid';
 import {
-  IFindDeliverymanByUsername,
   ICreateDeliverymanTokenRepository,
+  IFindDeliverymanByUsernameRepository,
 } from '@application/protocols/repositories/deliveryman';
 
 export class AuthenticateDeliverymanUseCase
   implements IAuthenticateDeliverymanUseCase
 {
   constructor(
-    private readonly findDeliverymanByUsername: IFindDeliverymanByUsername,
+    private readonly findDeliverymanByUsernameRepository: IFindDeliverymanByUsernameRepository,
     private readonly compareHashProvider: ICompareHashProvider,
     private readonly encryptProvider: IEncryptProvider,
     private readonly generateUuidProvider: IGenerateUuidProvider,
@@ -29,9 +29,10 @@ export class AuthenticateDeliverymanUseCase
   ): Promise<IAuthenticateDeliverymanUseCase.Output> {
     const { username, password } = data;
 
-    const deliveryman = await this.findDeliverymanByUsername.findByUsername({
-      username,
-    });
+    const deliveryman =
+      await this.findDeliverymanByUsernameRepository.findByUsername({
+        username,
+      });
 
     if (!deliveryman) {
       throw new DeliverymanNotFoundWithProvidedUsernameError();

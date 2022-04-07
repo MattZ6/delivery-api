@@ -129,7 +129,7 @@ describe('AuthenticateClientUseCase', () => {
     await expect(promise).rejects.toThrowError(errorMock);
   });
 
-  it('should throw WrongPasswordError if CompareHashProviderSpy returns false', async () => {
+  it('should throw WrongPasswordError if CompareHashProvider returns false', async () => {
     jest.spyOn(compareHashProviderSpy, 'compare').mockResolvedValueOnce(false);
 
     const input = makeAuthenticateClientUseCaseInputMock();

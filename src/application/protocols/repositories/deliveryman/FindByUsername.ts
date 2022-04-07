@@ -1,6 +1,6 @@
 import { Deliveryman } from '@domain/entities/Deliveryman';
 
-namespace IFindDeliverymanByUsername {
+namespace IFindDeliverymanByUsernameRepository {
   export type Input = {
     username: string;
   };
@@ -8,10 +8,10 @@ namespace IFindDeliverymanByUsername {
   export type Output = Deliveryman | null;
 }
 
-interface IFindDeliverymanByUsername {
+interface IFindDeliverymanByUsernameRepository {
   findByUsername(
-    data: IFindDeliverymanByUsername.Input
-  ): Promise<IFindDeliverymanByUsername.Output>;
+    data: IFindDeliverymanByUsernameRepository.Input
+  ): Promise<IFindDeliverymanByUsernameRepository.Output>;
 }
 
-export { IFindDeliverymanByUsername };
+export { IFindDeliverymanByUsernameRepository };
