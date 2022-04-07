@@ -28,12 +28,12 @@ class CreateDeliveryController implements IController {
 
       const { item_name } = request.body;
 
-      const delivery = await this.createDeliveryUseCase.execute({
+      await this.createDeliveryUseCase.execute({
         client_id: String(request.client_id),
         item_name,
       });
 
-      return created(delivery);
+      return created<void>();
     } catch (error) {
       if (error instanceof ValidationError) {
         return badRequest(error);

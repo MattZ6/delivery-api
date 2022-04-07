@@ -1,4 +1,5 @@
 import {
+  ICheckIfClientExistsByIdRepository,
   ICheckIfClientExistsByUsernameRepository,
   ICreateClientRepository,
   IFindClientByUsernameRepository,
@@ -43,5 +44,15 @@ export class CreateClientRepositorySpy implements ICreateClientRepository {
     Object.assign(clientMock, { username, password_hash });
 
     return clientMock;
+  }
+}
+
+export class CheckIfClientExistsByIdRepositorySpy
+  implements ICheckIfClientExistsByIdRepository
+{
+  async checkIfExistsById(
+    _: ICheckIfClientExistsByIdRepository.Input
+  ): Promise<ICheckIfClientExistsByIdRepository.Output> {
+    return true;
   }
 }
