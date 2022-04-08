@@ -2,6 +2,7 @@ import {
   ICreateDeliveryRepository,
   IFindAllAvailableDeliveriesRepository,
   IFindAllDeliveriesFromClientRepository,
+  IFindAllDeliveriesFromDeliverymanRepository,
   IFindDeliveryByIdRepository,
   IUpdateDeliveryRepository,
 } from '@application/protocols/repositories/delivery';
@@ -68,6 +69,16 @@ export class FindAllDeliveriesFromClientRepositorySpy
   async findAllFromClient(
     _: IFindAllDeliveriesFromClientRepository.Input
   ): Promise<IFindAllDeliveriesFromClientRepository.Output> {
+    return [];
+  }
+}
+
+export class FindAllDeliveriesFromDeliverymanRepositorySpy
+  implements IFindAllDeliveriesFromDeliverymanRepository
+{
+  async findAllFromDeliveryman(
+    _: IFindAllDeliveriesFromDeliverymanRepository.Input
+  ): Promise<IFindAllDeliveriesFromDeliverymanRepository.Output> {
     return [];
   }
 }
