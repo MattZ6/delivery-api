@@ -56,7 +56,10 @@ namespace FindAllDeliveriesFromClientController {
   export type Limit = IFindAllDeliveriesFromClientUseCase.Limit;
   export type Offset = IFindAllDeliveriesFromClientUseCase.Offset;
 
-  export type RequestQueryParams = IFindAllDeliveriesFromClientUseCase.Input;
+  export type RequestQueryParams = Omit<
+    IFindAllDeliveriesFromClientUseCase.Input,
+    'client_id'
+  >;
 
   export type Request = IHttpRequest<void, void, RequestQueryParams, void>;
 
