@@ -4,6 +4,7 @@ import {
   DeliveryAlreadyFinishedError,
   DeliverymanNotFoundWithProvidedIdError,
   DeliveryNotFoundWithProvidedIdError,
+  DeliveryNotStartedError,
   DeliveryStartedByAnotherDeliverymanError,
 } from '@domain/errors';
 
@@ -88,6 +89,22 @@ describe('DeliverDeliveryUseCase', () => {
     await expect(promise).rejects.toBeInstanceOf(
       DeliveryNotFoundWithProvidedIdError
     );
+  });
+
+  it('should throw DeliveryNotStartedError if the delivery does not have a delivery_man', async () => {
+    const deliveryMock = makeDeliveryMock();
+
+    deliveryMock.deliveryman_id = undefined;
+
+    jest
+      .spyOn(findDeliveryByIdRepositorySpy, 'findById')
+      .mockResolvedValueOnce(deliveryMock);
+
+    const input = makeDeliverDeliveryUseCaseInputMock();
+
+    const promise = deliverDeliveryUseCase.execute(input);
+
+    await expect(promise).rejects.toBeInstanceOf(DeliveryNotStartedError);
   });
 
   it('should throw DeliveryNotStartedError if the delivery not have a deliveryman_id', async () => {
