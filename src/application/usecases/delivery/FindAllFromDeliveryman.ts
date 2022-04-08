@@ -1,4 +1,4 @@
-import { DeliveryNotFoundWithProvidedIdError } from '@domain/errors';
+import { DeliverymanNotFoundWithProvidedIdError } from '@domain/errors';
 import { IFindAllDeliveriesFromDeliverymanUseCase } from '@domain/usecases/delivery/FindAllFromDeliveryman';
 
 import { IFindAllDeliveriesFromDeliverymanRepository } from '@application/protocols/repositories/delivery';
@@ -25,7 +25,7 @@ export class FindAllDeliveriesFromDeliverymanUseCase
       });
 
     if (!deliverymanExists) {
-      throw new DeliveryNotFoundWithProvidedIdError();
+      throw new DeliverymanNotFoundWithProvidedIdError();
     }
 
     const sort_by = (data.sort_by ??
