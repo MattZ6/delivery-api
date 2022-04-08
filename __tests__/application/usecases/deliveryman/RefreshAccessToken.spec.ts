@@ -32,7 +32,7 @@ let refreshDeliverymanAccessTokenUseCase: RefreshDeliverymanAccessTokenUseCase;
 function setValidTokenTimeMock() {
   const deliverymanTokenMock = makeDeliverymanTokenMock();
 
-  jest
+  const findByTokenSpy = jest
     .spyOn(findDeliverymanTokenByTokenRepositorySpy, 'findByToken')
     .mockResolvedValueOnce(deliverymanTokenMock);
 
@@ -40,7 +40,7 @@ function setValidTokenTimeMock() {
     .spyOn(Date, 'now')
     .mockReturnValueOnce(deliverymanTokenMock.expires_in.getTime());
 
-  return { deliverymanTokenMock };
+  return { deliverymanTokenMock, findByTokenSpy };
 }
 
 describe('RefreshDeliverymanAccessTokenUseCase', () => {
@@ -68,10 +68,7 @@ describe('RefreshDeliverymanAccessTokenUseCase', () => {
   });
 
   it('should call FindDeliverymanTokenByTokenRepository once with correct values', async () => {
-    const findByTokenSpy = jest.spyOn(
-      findDeliverymanTokenByTokenRepositorySpy,
-      'findByToken'
-    );
+    const { findByTokenSpy } = setValidTokenTimeMock();
 
     const input = makeRefreshDeliverymanAccessTokenUseCaseInputMock();
 

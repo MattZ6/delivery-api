@@ -32,7 +32,7 @@ let refreshClientAccessTokenUseCase: RefreshClientAccessTokenUseCase;
 function setValidTokenTimeMock() {
   const clientTokenMock = makeClientTokenMock();
 
-  jest
+  const findByTokenSpy = jest
     .spyOn(findClientTokenByTokenRepositorySpy, 'findByToken')
     .mockResolvedValueOnce(clientTokenMock);
 
@@ -40,7 +40,7 @@ function setValidTokenTimeMock() {
     .spyOn(Date, 'now')
     .mockReturnValueOnce(clientTokenMock.expires_in.getTime());
 
-  return { clientTokenMock };
+  return { clientTokenMock, findByTokenSpy };
 }
 
 describe('RefreshClientAccessTokenUseCase', () => {
@@ -66,10 +66,7 @@ describe('RefreshClientAccessTokenUseCase', () => {
   });
 
   it('should call FindClientTokenByTokenRepository once with correct values', async () => {
-    const findByTokenSpy = jest.spyOn(
-      findClientTokenByTokenRepositorySpy,
-      'findByToken'
-    );
+    const { findByTokenSpy } = setValidTokenTimeMock();
 
     const input = makeRefreshClientAccessTokenUseCaseInputMock();
 
