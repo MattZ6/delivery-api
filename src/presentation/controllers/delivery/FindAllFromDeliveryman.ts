@@ -56,8 +56,10 @@ namespace FindAllDeliveriesFromDeliverymanController {
   export type Limit = IFindAllDeliveriesFromDeliverymanUseCase.Limit;
   export type Offset = IFindAllDeliveriesFromDeliverymanUseCase.Offset;
 
-  export type RequestQueryParams =
-    IFindAllDeliveriesFromDeliverymanUseCase.Input;
+  export type RequestQueryParams = Omit<
+    IFindAllDeliveriesFromDeliverymanUseCase.Input,
+    'deliveryman_id'
+  >;
 
   export type Request = IHttpRequest<void, void, RequestQueryParams, void>;
 
