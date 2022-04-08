@@ -1,5 +1,6 @@
 import {
   ICreateDeliveryRepository,
+  IFindAllAvailableDeliveriesRepository,
   IFindDeliveryByIdRepository,
   IUpdateDeliveryRepository,
 } from '@application/protocols/repositories/delivery';
@@ -47,5 +48,15 @@ export class UpdateDeliveryRepositorySpy implements IUpdateDeliveryRepository {
     Object.assign(deliveryMock, { id, delivered_at, deliveryman_id });
 
     return deliveryMock;
+  }
+}
+
+export class FindAllAvailableDeliveriesRepositorySpy
+  implements IFindAllAvailableDeliveriesRepository
+{
+  async findAllAvailable(
+    _: IFindAllAvailableDeliveriesRepository.Input
+  ): Promise<IFindAllAvailableDeliveriesRepository.Output> {
+    return [];
   }
 }
