@@ -21,11 +21,9 @@ export class ControllerErrorHandlerDecorator implements IController {
     } catch (err) {
       const error = err as Error;
 
-      console.log(error);
-
       this.saveErrorRepository
         .save({
-          stack: error?.stack ?? 'NO STACK PROVIDED',
+          stack: error.stack ?? 'NO STACK PROVIDED',
           thrown_at: this.controller.constructor.name,
           resource_uri: request.original_url,
           http_method: request.method,
