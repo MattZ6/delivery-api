@@ -1,10 +1,10 @@
-import { IController } from '@presentation/protocols';
+import { IMiddleware } from '@presentation/protocols';
 
-import { ControllerErrorHandlerDecorator } from '@main/decorators/ControllerErrorHandler';
+import { MiddlewareErrorHandlerDecorator } from '@main/decorators/MiddlewareErrorHandler';
 import { makeErrorsRepository } from '@main/factories/repositories/Error';
 
-export function makeMiddlewareErrorHandlerDecorator(controller: IController) {
+export function makeMiddlewareErrorHandlerDecorator(middleware: IMiddleware) {
   const errorsRepository = makeErrorsRepository();
 
-  return new ControllerErrorHandlerDecorator(controller, errorsRepository);
+  return new MiddlewareErrorHandlerDecorator(middleware, errorsRepository);
 }
