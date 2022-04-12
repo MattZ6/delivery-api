@@ -1,0 +1,1919 @@
+{
+  "openapi": "3.0.0",
+  "externalDocs": {
+    "description": "Source code",
+    "url": "https://github.com/MattZ6/delivery-api"
+  },
+  "info": {
+    "version": "v1.0.0",
+    "title": "📜 Delivery API Docs",
+    "description": "Delivery API documentation",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/MattZ6/delivery-api/blob/main/LICENSE.md"
+    },
+    "contact": {
+      "name": "Matheus Felipe Zanin",
+      "email": "matt_z6@hotmail.com",
+      "url": "https://github.com/MattZ6"
+    }
+  },
+  "tags": [
+    {
+      "name": "Client",
+      "description": "Endpoints related to the Client's scope"
+    },
+    {
+      "name": "Deliveryman",
+      "description": "Endpoints related to the Deliveryman's scope"
+    },
+    {
+      "name": "Delivery",
+      "description": "Endpoints related to the Delivery's scope"
+    }
+  ],
+  "paths": {
+    "/v1/clients/auth/sign/in": {
+      "post": {
+        "tags": ["Client"],
+        "summary": "Performs Client authentication",
+        "description": "Performs Client authentication",
+        "requestBody": {
+          "required": true,
+          "description": "Client credentials",
+          "content": {
+            "application/json": {
+              "example": {
+                "username": "client",
+                "password": "123456"
+              },
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "access_token": "...",
+                  "refresh_token": "..."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Username required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "required",
+                        "value": null,
+                        "message": "The username field is required."
+                      }
+                    }
+                  },
+                  "Username min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "minlength",
+                        "value": 3,
+                        "message": "The username must have at least 3 characters"
+                      }
+                    }
+                  },
+                  "Password required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "required",
+                        "value": null,
+                        "message": "The password field is required."
+                      }
+                    }
+                  },
+                  "Password min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "minlength",
+                        "value": 6,
+                        "message": "The password must have at least 6 characters"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "client.not.exists",
+                  "message": "Client not found with provided username."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "password.wrong",
+                  "message": "Wrong password."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/clients/auth/sign/up": {
+      "post": {
+        "tags": ["Client"],
+        "summary": "Performs a Client registration",
+        "description": "Performs a Client registration.",
+        "requestBody": {
+          "required": true,
+          "description": "The Client data",
+          "content": {
+            "application/json": {
+              "example": {
+                "username": "client",
+                "password": "123456"
+              },
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Username required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "required",
+                        "value": null,
+                        "message": "The username field is required."
+                      }
+                    }
+                  },
+                  "Username min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "minlength",
+                        "value": 3,
+                        "message": "The username must have at least 3 characters"
+                      }
+                    }
+                  },
+                  "Password required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "required",
+                        "value": null,
+                        "message": "The password field is required."
+                      }
+                    }
+                  },
+                  "Password min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "minlength",
+                        "value": 6,
+                        "message": "The password must have at least 6 characters"
+                      }
+                    }
+                  },
+                  "Password confirmation required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password_confirmation",
+                        "type": "required",
+                        "value": null,
+                        "message": "The password_confirmation field is required."
+                      }
+                    }
+                  },
+                  "Password confirmation min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password_confirmation",
+                        "type": "minlength",
+                        "value": 6,
+                        "message": "The password_confirmation must have at least 6 characters"
+                      }
+                    }
+                  },
+                  "Passwords not match": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password_confirmation",
+                        "type": "divergent",
+                        "value": null,
+                        "message": "The value of the password_confirmation field is different from the value of the password field"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "client.exists",
+                  "message": "There is already a registered client with this username."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/clients/auth/refresh": {
+      "post": {
+        "tags": ["Client"],
+        "summary": "Revalidates Client access",
+        "description": "Perform the revalidation of the Client's access token.",
+        "requestBody": {
+          "required": true,
+          "description": "The Client's refresh token",
+          "content": {
+            "application/json": {
+              "example": {
+                "refresh_token": "..."
+              },
+              "schema": {
+                "$ref": "#/components/schemas/RefreshToken"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Refresh token required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "refresh_token",
+                        "type": "required",
+                        "value": null,
+                        "message": "The refresh_token field is required."
+                      }
+                    }
+                  },
+                  "Refresh token invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "refresh_token",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The refresh_token is not a valid UUID."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "client_token.not.exists",
+                  "message": "Token not found."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "client_token.expired",
+                  "message": "Token has expired."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/clients/me/deliveries": {
+      "post": {
+        "tags": ["Client", "Delivery"],
+        "summary": "Creates a Delivery",
+        "description": "Performs the creation of a Delivery for the authenticated Client",
+        "security": [{ "clientAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "description": "The Delivery data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item_name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "item_name": "Mouse Bluetooth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Item name required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "item_name",
+                        "type": "required",
+                        "value": null,
+                        "message": "The item_name field is required."
+                      }
+                    }
+                  },
+                  "Item name min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "item_name",
+                        "type": "minlength",
+                        "value": 3,
+                        "message": "The item_name must have at least 3 characters"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Access token missing": {
+                    "value": {
+                      "code": "token.not.provided",
+                      "message": "Missing access token."
+                    }
+                  },
+                  "Access token invalid": {
+                    "value": {
+                      "code": "token.invalid",
+                      "message": "Invalid access token."
+                    }
+                  },
+                  "Access token expired": {
+                    "value": {
+                      "code": "token.expired",
+                      "message": "The token is expired."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "permission.denied",
+                  "message": "You don't have permission to perform this action."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "client.not.exists",
+                  "message": "Client not found with provided id."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Client", "Delivery"],
+        "summary": "Query all Deliveries from the authenticated Client",
+        "description": "Query all Deliveries from the authenticated Client",
+        "security": [{ "clientAuth": [] }],
+        "parameters": [
+          {
+            "name": "sort_by",
+            "description": "The sort by value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["created_at", "item_name"],
+              "nullable": true
+            }
+          },
+          {
+            "name": "order",
+            "description": "The order value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "description": "The limit value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "description": "The offset value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delivery"
+                },
+                "example": [
+                  {
+                    "id": "...",
+                    "item_name": "Mouse Wireless",
+                    "client_id": "...",
+                    "deliveryman_id": null,
+                    "created_at": "2022-04-01T13:00:00.000",
+                    "updated_at": "2022-04-01T13:00:00.000",
+                    "delivered_at": null
+                  },
+                  {
+                    "id": "...",
+                    "item_name": "Headset Wireless",
+                    "client_id": "...",
+                    "deliveryman_id": "...",
+                    "created_at": "2022-04-01T12:00:00.000",
+                    "updated_at": "2022-04-01T12:00:00.000",
+                    "delivered_at": null
+                  },
+                  {
+                    "id": "...",
+                    "item_name": "Headset Wireless",
+                    "client_id": "...",
+                    "deliveryman_id": "...",
+                    "created_at": "2022-03-30T08:00:00.000",
+                    "updated_at": "2022-03-31T11:30:00.000",
+                    "delivered_at": "2022-03-31T11:30:00.000"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sort by invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "sort_by",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The value of the sort_by field is not one of created_at, item_name values"
+                      }
+                    }
+                  },
+                  "Order invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "order",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The value of the order field is not one of asc, desc values"
+                      }
+                    }
+                  },
+                  "Limit invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "number",
+                        "value": null,
+                        "message": "The value of limit must contain only numbers"
+                      }
+                    }
+                  },
+                  "Limit min value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "min",
+                        "value": 1,
+                        "message": "The min value of limit field is 1"
+                      }
+                    }
+                  },
+                  "Limit max value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "max",
+                        "value": 100,
+                        "message": "The max value of limit field is 100"
+                      }
+                    }
+                  },
+                  "Offset invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "offset",
+                        "type": "number",
+                        "value": null,
+                        "message": "The value of offset must contain only numbers"
+                      }
+                    }
+                  },
+                  "Offset min value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "offset",
+                        "type": "min",
+                        "value": 0,
+                        "message": "The min value of offset field is 0"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Access token missing": {
+                    "value": {
+                      "code": "token.not.provided",
+                      "message": "Missing access token."
+                    }
+                  },
+                  "Access token invalid": {
+                    "value": {
+                      "code": "token.invalid",
+                      "message": "Invalid access token."
+                    }
+                  },
+                  "Access token expired": {
+                    "value": {
+                      "code": "token.expired",
+                      "message": "The token is expired."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "permission.denied",
+                  "message": "You don't have permission to perform this action."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "client.not.exists",
+                  "message": "Client not found with provided id."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/deliverymans/auth/sign/in": {
+      "post": {
+        "tags": ["Deliveryman"],
+        "summary": "Performs Deliveryman authentication",
+        "description": "Performs Deliveryman authentication",
+        "requestBody": {
+          "required": true,
+          "description": "The Deliveryman credentials",
+          "content": {
+            "application/json": {
+              "example": {
+                "username": "deliveryman",
+                "password": "123456"
+              },
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "access_token": "...",
+                  "refresh_token": "..."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Username required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "required",
+                        "value": null,
+                        "message": "The username field is required."
+                      }
+                    }
+                  },
+                  "Username min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "minlength",
+                        "value": 3,
+                        "message": "The username must have at least 3 characters"
+                      }
+                    }
+                  },
+                  "Password required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "required",
+                        "value": null,
+                        "message": "The password field is required."
+                      }
+                    }
+                  },
+                  "Password min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "minlength",
+                        "value": 6,
+                        "message": "The password must have at least 6 characters"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "deliveryman.not.exists",
+                  "message": "Deliveryman not found with provided username."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "password.wrong",
+                  "message": "Wrong password."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/deliverymans/auth/sign/up": {
+      "post": {
+        "tags": ["Deliveryman"],
+        "summary": "Performs a Deliveryman registration",
+        "description": "Performs a Deliveryman registration.",
+        "requestBody": {
+          "required": true,
+          "description": "The Deliveryman data",
+          "content": {
+            "application/json": {
+              "example": {
+                "username": "deliveryman",
+                "password": "123456"
+              },
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Username required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "required",
+                        "value": null,
+                        "message": "The username field is required."
+                      }
+                    }
+                  },
+                  "Username min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "username",
+                        "type": "minlength",
+                        "value": 3,
+                        "message": "The username must have at least 3 characters"
+                      }
+                    }
+                  },
+                  "Password required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "required",
+                        "value": null,
+                        "message": "The password field is required."
+                      }
+                    }
+                  },
+                  "Password min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password",
+                        "type": "minlength",
+                        "value": 6,
+                        "message": "The password must have at least 6 characters"
+                      }
+                    }
+                  },
+                  "Password confirmation required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password_confirmation",
+                        "type": "required",
+                        "value": null,
+                        "message": "The password_confirmation field is required."
+                      }
+                    }
+                  },
+                  "Password confirmation min length": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password_confirmation",
+                        "type": "minlength",
+                        "value": 6,
+                        "message": "The password_confirmation must have at least 6 characters"
+                      }
+                    }
+                  },
+                  "Passwords not match": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "password_confirmation",
+                        "type": "divergent",
+                        "value": null,
+                        "message": "The value of the password_confirmation field is different from the value of the password field"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "deliveryman.exists",
+                  "message": "There is already a registered deliveryman with this username."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/deliverymans/auth/refresh": {
+      "post": {
+        "tags": ["Deliveryman"],
+        "summary": "Revalidates Deliveryman access",
+        "description": "Perform the revalidation of the Deliveryman's access token.",
+        "requestBody": {
+          "required": true,
+          "description": "The Deliveryman's refresh token",
+          "content": {
+            "application/json": {
+              "example": {
+                "refresh_token": "..."
+              },
+              "schema": {
+                "$ref": "#/components/schemas/RefreshToken"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Refresh token required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "refresh_token",
+                        "type": "required",
+                        "value": null,
+                        "message": "The refresh_token field is required."
+                      }
+                    }
+                  },
+                  "Refresh token invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "refresh_token",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The refresh_token is not a valid UUID."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "deliveryman_token.not.exists",
+                  "message": "Token not found."
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "deliveryman_token.expired",
+                  "message": "Token has expired."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/deliverymans/deliveries/available": {
+      "get": {
+        "tags": ["Deliveryman", "Delivery"],
+        "summary": "Query all available Deliveries to the autheticated Deliveryman",
+        "description": "Query all available Deliveries to the autheticated Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
+        "parameters": [
+          {
+            "name": "sort_by",
+            "description": "The sort by value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["created_at", "item_name"],
+              "nullable": true
+            }
+          },
+          {
+            "name": "order",
+            "description": "The order value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "description": "The limit value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "description": "The offset value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delivery"
+                },
+                "example": [
+                  {
+                    "id": "...",
+                    "item_name": "Mouse Wireless",
+                    "client_id": "...",
+                    "deliveryman_id": null,
+                    "created_at": "2022-04-01T13:00:00.000",
+                    "updated_at": "2022-04-01T13:00:00.000",
+                    "delivered_at": null
+                  },
+                  {
+                    "id": "...",
+                    "item_name": "Headset Wireless",
+                    "client_id": "...",
+                    "deliveryman_id": null,
+                    "created_at": "2022-04-01T12:00:00.000",
+                    "updated_at": "2022-04-01T12:00:00.000",
+                    "delivered_at": null
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sort by invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "sort_by",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The value of the sort_by field is not one of created_at, item_name values"
+                      }
+                    }
+                  },
+                  "Order invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "order",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The value of the order field is not one of asc, desc values"
+                      }
+                    }
+                  },
+                  "Limit invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "number",
+                        "value": null,
+                        "message": "The value of limit must contain only numbers"
+                      }
+                    }
+                  },
+                  "Limit min value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "min",
+                        "value": 1,
+                        "message": "The min value of limit field is 1"
+                      }
+                    }
+                  },
+                  "Limit max value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "max",
+                        "value": 100,
+                        "message": "The max value of limit field is 100"
+                      }
+                    }
+                  },
+                  "Offset invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "offset",
+                        "type": "number",
+                        "value": null,
+                        "message": "The value of offset must contain only numbers"
+                      }
+                    }
+                  },
+                  "Offset min value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "offset",
+                        "type": "min",
+                        "value": 0,
+                        "message": "The min value of offset field is 0"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Access token missing": {
+                    "value": {
+                      "code": "token.not.provided",
+                      "message": "Missing access token."
+                    }
+                  },
+                  "Access token invalid": {
+                    "value": {
+                      "code": "token.invalid",
+                      "message": "Invalid access token."
+                    }
+                  },
+                  "Access token expired": {
+                    "value": {
+                      "code": "token.expired",
+                      "message": "The token is expired."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "permission.denied",
+                  "message": "You don't have permission to perform this action."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/deliverymans/deliveries/:delivery_id/start": {
+      "post": {
+        "tags": ["Deliveryman", "Delivery"],
+        "summary": "Starts Delivery to the authenticated Deliveryman",
+        "description": "Starts Delivery to the authenticated Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
+        "parameters": [
+          {
+            "name": "delivery_id",
+            "description": "The Delivery id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": false,
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Delivery id required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "delivery_id",
+                        "type": "required",
+                        "value": null,
+                        "message": "The delivery_id field is required"
+                      }
+                    }
+                  },
+                  "Delivery id invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "delivery_id",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The delivery_id is not a valid UUID"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Access token missing": {
+                    "value": {
+                      "code": "token.not.provided",
+                      "message": "Missing access token."
+                    }
+                  },
+                  "Access token invalid": {
+                    "value": {
+                      "code": "token.invalid",
+                      "message": "Invalid access token."
+                    }
+                  },
+                  "Access token expired": {
+                    "value": {
+                      "code": "token.expired",
+                      "message": "The token is expired."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "permission.denied",
+                  "message": "You don't have permission to perform this action."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Delivery not found": {
+                    "value": {
+                      "code": "delivery.not.exists",
+                      "message": "Delivery not found with provided id."
+                    }
+                  },
+                  "Deliveryman not found": {
+                    "value": {
+                      "code": "deliveryman.not.exists",
+                      "message": "Deliveryman not found with provided id."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "delivery.started",
+                  "message": "The delivery has already begun."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/deliverymans/me/deliveries": {
+      "get": {
+        "tags": ["Deliveryman", "Delivery"],
+        "summary": "Query all Deliveries from the authenticated Deliveryman",
+        "description": "Query all Deliveries from the authenticated Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
+        "parameters": [
+          {
+            "name": "sort_by",
+            "description": "The sort by value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["created_at", "item_name"],
+              "nullable": true
+            }
+          },
+          {
+            "name": "order",
+            "description": "The order value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "nullable": true
+            }
+          },
+          {
+            "name": "limit",
+            "description": "The limit value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "description": "The offset value",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "nullable": true,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delivery"
+                },
+                "example": [
+                  {
+                    "id": "...",
+                    "item_name": "Headset Wireless",
+                    "client_id": "...",
+                    "deliveryman_id": "...",
+                    "created_at": "2022-04-01T12:00:00.000",
+                    "updated_at": "2022-04-01T12:00:00.000",
+                    "delivered_at": null
+                  },
+                  {
+                    "id": "...",
+                    "item_name": "Headset Wireless",
+                    "client_id": "...",
+                    "deliveryman_id": "...",
+                    "created_at": "2022-03-30T08:00:00.000",
+                    "updated_at": "2022-03-31T11:30:00.000",
+                    "delivered_at": "2022-03-31T11:30:00.000"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sort by invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "sort_by",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The value of the sort_by field is not one of created_at, item_name values"
+                      }
+                    }
+                  },
+                  "Order invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "order",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The value of the order field is not one of asc, desc values"
+                      }
+                    }
+                  },
+                  "Limit invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "number",
+                        "value": null,
+                        "message": "The value of limit must contain only numbers"
+                      }
+                    }
+                  },
+                  "Limit min value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "min",
+                        "value": 1,
+                        "message": "The min value of limit field is 1"
+                      }
+                    }
+                  },
+                  "Limit max value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "limit",
+                        "type": "max",
+                        "value": 100,
+                        "message": "The max value of limit field is 100"
+                      }
+                    }
+                  },
+                  "Offset invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "offset",
+                        "type": "number",
+                        "value": null,
+                        "message": "The value of offset must contain only numbers"
+                      }
+                    }
+                  },
+                  "Offset min value": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "offset",
+                        "type": "min",
+                        "value": 0,
+                        "message": "The min value of offset field is 0"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Access token missing": {
+                    "value": {
+                      "code": "token.not.provided",
+                      "message": "Missing access token."
+                    }
+                  },
+                  "Access token invalid": {
+                    "value": {
+                      "code": "token.invalid",
+                      "message": "Invalid access token."
+                    }
+                  },
+                  "Access token expired": {
+                    "value": {
+                      "code": "token.expired",
+                      "message": "The token is expired."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "permission.denied",
+                  "message": "You don't have permission to perform this action."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "deliveryman.not.exists",
+                  "message": "Deliveryman not found with provided id."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/deliverymans/me/deliveries/:delivery_id/deliver": {
+      "post": {
+        "tags": ["Deliveryman", "Delivery"],
+        "summary": "Finalize a Delivery from a Deliveryman",
+        "description": "Finalize a Delivery from a Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
+        "parameters": [
+          {
+            "name": "delivery_id",
+            "description": "The Delivery id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": false,
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Delivery id required": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "delivery_id",
+                        "type": "required",
+                        "value": null,
+                        "message": "The delivery_id field is required"
+                      }
+                    }
+                  },
+                  "Delivery id invalid": {
+                    "value": {
+                      "code": "validation",
+                      "message": "Validation error",
+                      "validation": {
+                        "field": "delivery_id",
+                        "type": "invalid",
+                        "value": null,
+                        "message": "The delivery_id is not a valid UUID"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Access token missing": {
+                    "value": {
+                      "code": "token.not.provided",
+                      "message": "Missing access token."
+                    }
+                  },
+                  "Access token invalid": {
+                    "value": {
+                      "code": "token.invalid",
+                      "message": "Invalid access token."
+                    }
+                  },
+                  "Access token expired": {
+                    "value": {
+                      "code": "token.expired",
+                      "message": "The token is expired."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "permission.denied",
+                  "message": "You don't have permission to perform this action."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "deliveryman.not.exists",
+                  "message": "Deliveryman not found with provided id."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": "internal",
+                  "message": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Credentials": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RefreshToken": {
+        "type": "object",
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "example": "..."
+          }
+        }
+      },
+      "Delivery": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "item_name": {
+            "type": "string"
+          },
+          "client_id": {
+            "type": "string"
+          },
+          "deliveryman_id": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "delivered_at": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "clientAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Access-Token",
+        "description": "The client access token"
+      },
+      "deliverymanAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Access-Token",
+        "description": "The deliveryman access token"
+      }
+    }
+  }
+}
