@@ -5,8 +5,6 @@
 
   > API para acompanhamento de entregas, construída na trilha de Node JS como conteúdo adicional do bootcamp Ignite da Rocketseat.
 
-  <strong>🚧 Sendo desenvolvida... 🚧</strong>
-
   [![build-image]][build-url] [![coveralls-image]][coveralls-url] [![license-image]][license-url]
 </div>
 
