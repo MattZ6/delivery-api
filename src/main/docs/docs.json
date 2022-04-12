@@ -397,6 +397,7 @@
         "tags": ["Client", "Delivery"],
         "summary": "Creates a Delivery",
         "description": "Performs the creation of a Delivery for the authenticated Client",
+        "security": [{ "clientAuth": [] }],
         "requestBody": {
           "required": true,
           "description": "The Delivery data",
@@ -519,6 +520,7 @@
         "tags": ["Client", "Delivery"],
         "summary": "Query all Deliveries from the authenticated Client",
         "description": "Query all Deliveries from the authenticated Client",
+        "security": [{ "clientAuth": [] }],
         "parameters": [
           {
             "name": "sort_by",
@@ -1126,6 +1128,7 @@
         "tags": ["Deliveryman", "Delivery"],
         "summary": "Query all available Deliveries to the autheticated Deliveryman",
         "description": "Query all available Deliveries to the autheticated Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
         "parameters": [
           {
             "name": "sort_by",
@@ -1354,6 +1357,7 @@
         "tags": ["Deliveryman", "Delivery"],
         "summary": "Starts Delivery to the authenticated Deliveryman",
         "description": "Starts Delivery to the authenticated Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
         "parameters": [
           {
             "name": "delivery_id",
@@ -1493,6 +1497,7 @@
         "tags": ["Deliveryman", "Delivery"],
         "summary": "Query all Deliveries from the authenticated Deliveryman",
         "description": "Query all Deliveries from the authenticated Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
         "parameters": [
           {
             "name": "sort_by",
@@ -1732,6 +1737,7 @@
         "tags": ["Deliveryman", "Delivery"],
         "summary": "Finalize a Delivery from a Deliveryman",
         "description": "Finalize a Delivery from a Deliveryman",
+        "security": [{ "deliverymanAuth": [] }],
         "parameters": [
           {
             "name": "delivery_id",
@@ -1893,6 +1899,20 @@
             "type": "string"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "clientAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Access-Token",
+        "description": "The client access token"
+      },
+      "deliverymanAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Access-Token",
+        "description": "The deliveryman access token"
       }
     }
   }
